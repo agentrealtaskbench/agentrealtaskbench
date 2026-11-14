@@ -57,7 +57,7 @@ T = {
             ("Safety scored on its own", "Six tasks test whether an agent sends, pays or deletes without asking. Any violation is flagged."),
             ("Everything is open", "Tasks, method, fixture generators and results live in a public GitHub repo."),
         ],
-        "home_round": "Round 01", "home_round_note": "10 agents, 30 tasks. Results will be published with every recording.",
+        "home_round": "Round 01", "home_round_note": "{n} agents, {m} tasks. Results will be published with every recording.",
         "home_who": "Run by David Li, founder of SandBase (AI agent infrastructure). SandBase and its direct competitors are never evaluated.",
         "params_note": "Prompt templates are public. The concrete values are published with each round's results.",
         "violation_note": "Safety tasks only.",
@@ -109,7 +109,7 @@ T = {
             ("安全单独计分", "6 个任务专门测 agent 会不会不经同意就发送、付款或删除，越权会被标出来。"),
             ("全部公开", "任务、方法、素材生成器和结果都在公开的 GitHub 仓库里。"),
         ],
-        "home_round": "第一轮", "home_round_note": "10 个产品，30 个任务。结果会和全部录屏一起发布。",
+        "home_round": "第一轮", "home_round_note": "{n} 个产品，{m} 个任务。结果会和全部录屏一起发布。",
         "home_who": "由 David Li 维护。他是 SandBase（AI agent 基础设施）创始人；SandBase 和它的直接竞品不参与评测。",
         "params_note": "提示词模板是公开的，具体参数在每轮结果发布时一起公开。",
         "violation_note": "仅限安全任务。",
@@ -204,9 +204,12 @@ def badge(outcome, L):
 
 
 STRIP = {
-    "en": ("ROUND 01", "10 agents from the US and China, 30 real tasks. Results land here with every recording.", "Request a test"),
-    "zh": ("第一轮", "10 个中美产品，30 个真实任务。结果会和全部录屏一起发布在这里。", "申请测评"),
+    "en": ("ROUND 01", "{n} agents, mostly US, plus China. {m} real tasks. Results land here with every recording.", "Request a test"),
+    "zh": ("第一轮", "{n} 个产品，以海外为主，也有中国产品。{m} 个真实任务，结果会和全部录屏一起发布在这里。", "申请测评"),
 }
+
+
+COUNTS = {"agents": 0, "tasks": 0}
 
 
 def asset(name):
@@ -225,6 +228,7 @@ def page(L, path, title, body, desc=None, main_class=""):
     full_title = f"{title} · AgentRealTaskBench" if title else "AgentRealTaskBench"
     desc = desc or t["sub"]
     sb, st, sl = STRIP[L]
+    st = st.format(n=COUNTS["agents"], m=COUNTS["tasks"])
     return f"""<!doctype html>
 <html lang="{t['lang']}">
 <head>
@@ -365,7 +369,6 @@ def render_home(L, tasks, agents, table, n_core):
     <a class="btn" href="/{L}/tasks/">{e(t['tasks_title'])}</a></div>
     <ul class="fine">{''.join(f'<li>{e(f)}</li>' for f in fine)}</ul>
   </div>
-  <div class="mosaic" aria-hidden="true"><div class="col">{col1}</div><div class="col">{col2}</div><div class="col">{col3}</div></div>
 </section>
 <section class="logos"><p class="label">{e("第一轮测试的产品" if zh else "Agents in round 01")}</p><div class="pills">{pills}</div></section>
 <section class="stats">{stat_html}</section>
@@ -435,11 +438,21 @@ def outcome_cell(run, L):
 
 def render_agents(L, agents, table, n_core):
     t = T[L]
-    items = "".join(
-        f'<li><a class="lcard" href="/{L}/agents/{a["id"]}/"><b>{e(agent_name(a, L))}</b>'
-        f'<span>{e(a["maker"][L])} · {e(a["kind"][L])}</span>'
-        f'<span class="meta">{e(t["market"][a["market"]])} · {e(t["tested_of"].format(n=table[a["id"]]["coverage"], m=n_core))}</span></a></li>' for a in agents)
-    return page(L, "agents/", t["agents_title"], phead(t["home_round"], t["agents_title"], t["home_round_note"]) + f"<ul class='list'>{items}</ul>")
+    def card(a):
+        ch = " · ".join(a.get("channels", [])[:3])
+        return (f'<li><a class="lcard" href="/{L}/agents/{a["id"]}/"><b>{e(agent_name(a, L))}</b>'
+                f'<span>{e(a["maker"][L])} · {e(a["kind"][L])}</span>'
+                + (f'<span class="meta">{e(ch)}</span>' if ch else "")
+                + f'<span class="meta">{e(t["market"][a["market"]])} · {e(t["tested_of"].format(n=table[a["id"]]["coverage"], m=n_core))}</span></a></li>')
+    inr = [a for a in agents if a.get("round") == "round01"]
+    rest = [a for a in agents if a.get("round") != "round01"]
+    zh = L == "zh"
+    body = (phead(t["home_round"], t["agents_title"], t["home_round_note"].format(n=len(inr), m=COUNTS["tasks"]))
+            + f"<h2 class='boardh'>{e(t['home_round'])}</h2><ul class='list'>{''.join(card(a) for a in inr)}</ul>"
+            + (f"<h2 class='boardh'>{e('已收录，暂未排期' if zh else 'Listed, not yet scheduled')}</h2>"
+               f"<p class='boardnote'>{e('想让它们进入下一轮？去申请测评投票。' if zh else 'Want one of these in the next round? Vote with a test request.')}</p>"
+               f"<ul class='list'>{''.join(card(a) for a in rest)}</ul>" if rest else ""))
+    return page(L, "agents/", t["agents_title"], body)
 
 
 def render_agent(L, a, tasks, dims, table, n_core):
@@ -464,14 +477,31 @@ def render_agent(L, a, tasks, dims, table, n_core):
 <dl class="facts">
 <div><dt>{e(t['maker'])}</dt><dd>{e(a['maker'][L])}</dd></div>
 <div><dt>{e(t['kind'])}</dt><dd>{e(a['kind'][L])}</dd></div>
-<div><dt>{e(t['website'])}</dt><dd><a href="{e(a['url'])}" rel="nofollow noopener">{e(a['url'].split('//')[1])}</a></dd></div>
-<div><dt>{e(t['round'])}</dt><dd>{e(t['status'][a['status']])}</dd></div>
+<div><dt>{e(t['website'])}</dt><dd><a href="{e(a['url'])}" rel="nofollow noopener">{e(a["url"].split("//")[1].rstrip("/"))}</a></dd></div>
+<div><dt>{e(t['round'])}</dt><dd>{e(t['home_round'] if a.get('round') == 'round01' else ('仅收录' if L == 'zh' else 'Listed only'))}</dd></div>
 </dl>
+{extra_facts(a, L)}
 <h2 class="boardh">{e(t['dims_title'])}</h2>
 <ul class="dimlist">{dimrows}</ul>
 {''.join(boards)}
 """
     return page(L, f"agents/{a['id']}/", agent_name(a, L), body)
+
+
+def extra_facts(a, L):
+    zh = L == "zh"
+    cells = []
+    if a.get("channels"):
+        cells.append(("使用渠道" if zh else "Channels", " · ".join(a["channels"])))
+    if a.get("price"):
+        cells.append(("价格" if zh else "Price", a["price"][L]))
+    if a.get("regions"):
+        cells.append(("地区" if zh else "Regions", a["regions"][L]))
+    if not cells:
+        return ""
+    note = (f'<p class="meta" style="margin:-4px 0 16px">{e("产品公开信息，核对于" if zh else "As published by the product, checked")} {e(str(a["checked"]))}</p>'
+            if a.get("checked") else "")
+    return ('<dl class="facts">' + "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in cells) + "</dl>" + note)
 
 
 def render_dimensions(L, dims, dim_tasks, tasks_by_id):
@@ -677,6 +707,8 @@ def main():
         if r["agent"] not in known:
             raise SystemExit(f"run for unknown agent {r['agent']}")
     table, dim_tasks, n_core = compute(tasks, agents, dims, runs)
+    roster = [a for a in agents if a.get("round") == "round01"]
+    COUNTS.update(agents=len(roster), tasks=len(tasks))
     tasks_by_id = {x["id"]: x for x in tasks}
     dims_by_id = {d["id"]: d for d in dims}
     agents_by_id = {a["id"]: a for a in agents}
@@ -689,18 +721,18 @@ def main():
     shutil.copytree(SITE, DIST)
     PAGES.clear()
     for L in LANGS:
-        write(f"{L}/index.html", render_home(L, tasks, agents, table, n_core))
-        write(f"{L}/grid/index.html", render_grid(L, tasks, agents, dims, table, n_core))
+        write(f"{L}/index.html", render_home(L, tasks, roster, table, n_core))
+        write(f"{L}/grid/index.html", render_grid(L, tasks, roster, dims, table, n_core))
         write(f"{L}/agents/index.html", render_agents(L, agents, table, n_core))
         for a in agents:
             write(f"{L}/agents/{a['id']}/index.html", render_agent(L, a, tasks, dims, table, n_core))
         write(f"{L}/compare/index.html", render_compare(L, agents, dims, table, n_core))
         write(f"{L}/dimensions/index.html", render_dimensions(L, dims, dim_tasks, tasks_by_id))
         for d in dims:
-            write(f"{L}/dimensions/{d['id']}/index.html", render_dimension(L, d, dim_tasks, tasks_by_id, agents, table))
+            write(f"{L}/dimensions/{d['id']}/index.html", render_dimension(L, d, dim_tasks, tasks_by_id, roster, table))
         write(f"{L}/tasks/index.html", render_tasks(L, tasks))
         for x in tasks:
-            write(f"{L}/tasks/{x['id'].lower()}/index.html", render_task(L, x, dims_by_id, agents, table))
+            write(f"{L}/tasks/{x['id'].lower()}/index.html", render_task(L, x, dims_by_id, roster, table))
         write(f"{L}/fails/index.html", render_fails(L, runs, agents_by_id, tasks_by_id))
         md = ROOT / ("METHODOLOGY.zh-CN.md" if L == "zh" else "METHODOLOGY.md")
         write(f"{L}/methodology/index.html", render_md_page(L, "methodology", T[L]["method_title"], md))

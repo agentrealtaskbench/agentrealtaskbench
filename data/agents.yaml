@@ -1,51 +1,27 @@
 # Agents tracked by ARTB. Facts only; anything unverified stays empty.
-# status: tracked (listed, not yet tested) | testing | tested
-- id: doubao
-  name: {en: Doubao, zh: 豆包}
-  maker: {en: ByteDance, zh: 字节跳动}
-  market: china
-  url: https://www.doubao.com
-  kind: {en: Consumer assistant, zh: 消费级助理}
-  status: tracked
-  round: round01
-- id: kimi
-  name: {en: Kimi, zh: Kimi}
-  maker: {en: Moonshot AI, zh: 月之暗面}
-  market: china
-  url: https://www.kimi.com
-  kind: {en: Consumer assistant, zh: 消费级助理}
-  status: tracked
-  round: round01
-- id: yuanbao
-  name: {en: Yuanbao, zh: 腾讯元宝}
-  maker: {en: Tencent, zh: 腾讯}
-  market: china
-  url: https://yuanbao.tencent.com
-  kind: {en: Consumer assistant, zh: 消费级助理}
-  status: tracked
-  round: round01
-- id: coze-space
-  name: {en: Coze Space, zh: 扣子空间}
-  maker: {en: ByteDance, zh: 字节跳动}
-  market: china
-  url: https://www.coze.cn
-  kind: {en: General agent, zh: 通用 agent}
-  status: tracked
-  round: round01
-- id: autoglm
-  name: {en: AutoGLM, zh: AutoGLM}
-  maker: {en: Zhipu AI, zh: 智谱}
-  market: china
-  url: https://autoglm.zhipuai.cn
-  kind: {en: Phone and browser agent, zh: 手机与浏览器 agent}
-  status: tracked
-  round: round01
+# status: tracked (listed) | testing | tested
+# round: round01 = in the first test round; omit = directory only.
+# price / channels: copied from the product's own site on `checked`; left out when not verified.
+
+# ---- General agents from large labs ----
 - id: chatgpt-agent
   name: {en: ChatGPT agent, zh: ChatGPT agent}
   maker: {en: OpenAI, zh: OpenAI}
   market: global
   url: https://chatgpt.com
   kind: {en: General agent, zh: 通用 agent}
+  channels: [Web, iOS, Android, macOS]
+  status: tracked
+  round: round01
+- id: dots
+  name: {en: Dots, zh: Dots}
+  maker: {en: OpenAI, zh: OpenAI}
+  market: global
+  url: https://openai.com/index/introducing-dots/
+  kind: {en: Personal assistant, zh: 个人助理}
+  channels: [ChatGPT, Slack, Microsoft Teams]
+  price: {en: "First dot included with ChatGPT Pro and Business Premium; Enterprise in beta", zh: "ChatGPT Pro 和 Business Premium 含第一个 dot；Enterprise 为测试版"}
+  checked: 2026-11-15
   status: tracked
   round: round01
 - id: gemini
@@ -54,6 +30,41 @@
   market: global
   url: https://gemini.google.com
   kind: {en: Consumer assistant, zh: 消费级助理}
+  channels: [Web, iOS, Android]
+  status: tracked
+  round: round01
+- id: claude
+  name: {en: Claude, zh: Claude}
+  maker: {en: Anthropic, zh: Anthropic}
+  market: global
+  url: https://claude.ai
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  channels: [Web, iOS, Android, macOS, Windows]
+  status: tracked
+  round: round01
+- id: muse
+  name: {en: Muse, zh: Muse}
+  maker: {en: Meta, zh: Meta}
+  market: global
+  url: https://muse.ai/
+  kind: {en: Personal assistant, zh: 个人助理}
+  status: tracked
+  round: round01
+- id: grok-bot
+  name: {en: GrokBot, zh: GrokBot}
+  maker: {en: Cursor, zh: Cursor}
+  market: global
+  url: https://cursor.com/grok-bot
+  kind: {en: General agent, zh: 通用 agent}
+  status: tracked
+  round: round01
+- id: perplexity
+  name: {en: Perplexity, zh: Perplexity}
+  maker: {en: Perplexity, zh: Perplexity}
+  market: global
+  url: https://www.perplexity.ai
+  kind: {en: Answer engine and agent, zh: 搜索与 agent}
+  channels: [Web, iOS, Android, Comet browser]
   status: tracked
   round: round01
 - id: manus
@@ -62,8 +73,88 @@
   market: global
   url: https://manus.im
   kind: {en: General agent, zh: 通用 agent}
+  channels: [Web, iOS, Android]
   status: tracked
   round: round01
+
+# ---- Personal assistants you text ----
+- id: poke
+  name: {en: Poke, zh: Poke}
+  maker: {en: Poke, zh: Poke}
+  market: global
+  url: https://poke.com/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  channels: [iMessage, WhatsApp, Telegram]
+  price: {en: "Free · Pro $19/mo · Ultra $199/mo", zh: "免费 · Pro $19/月 · Ultra $199/月"}
+  checked: 2026-11-15
+  status: tracked
+  round: round01
+- id: today
+  name: {en: Today, zh: Today}
+  maker: {en: Today, zh: Today}
+  market: global
+  url: https://today.ai/
+  kind: {en: Proactive personal assistant, zh: 主动型个人助理}
+  status: tracked
+  round: round01
+- id: instinct
+  name: {en: Instinct, zh: Instinct}
+  maker: {en: Instinct, zh: Instinct}
+  market: global
+  url: https://instinct.co/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  status: tracked
+  round: round01
+- id: tomo
+  name: {en: Tomo, zh: Tomo}
+  maker: {en: Tomo, zh: Tomo}
+  market: global
+  url: https://tomo.ai/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  status: tracked
+  round: round01
+- id: pally
+  name: {en: Pally, zh: Pally}
+  maker: {en: Pally, zh: Pally}
+  market: global
+  url: https://pally.com/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  channels: [iMessage, RCS, Telegram]
+  price: {en: "Free for everyone; Cloud Mac is a paid add-on", zh: "所有人免费；Cloud Mac 为付费附加项"}
+  checked: 2026-11-15
+  status: tracked
+  round: round01
+- id: asmi
+  name: {en: Asmi, zh: Asmi}
+  maker: {en: Asmi, zh: Asmi}
+  market: global
+  url: https://asmiai.com/
+  kind: {en: Real-world errands assistant, zh: 线下跑腿助理}
+  status: tracked
+  round: round01
+- id: szn
+  name: {en: szn, zh: szn}
+  maker: {en: szn, zh: szn}
+  market: global
+  url: https://theszn.ai/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  channels: [Text, Voice notes, Email]
+  checked: 2026-11-15
+  status: tracked
+  round: round01
+- id: tab
+  name: {en: Tab, zh: Tab}
+  maker: {en: Tab, zh: Tab}
+  market: global
+  url: https://tab.bot/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  channels: [iMessage, WhatsApp]
+  price: {en: Private beta, zh: 内测}
+  checked: 2026-11-15
+  status: tracked
+  round: round01
+
+# ---- Open source, self-hosted ----
 - id: openclaw
   name: {en: OpenClaw, zh: OpenClaw}
   maker: {en: Open source, zh: 开源}
@@ -80,3 +171,58 @@
   kind: {en: Self-hosted personal agent, zh: 自部署个人 agent}
   status: tracked
   round: round01
+
+# ---- China ----
+- id: doubao
+  name: {en: Doubao, zh: 豆包}
+  maker: {en: ByteDance, zh: 字节跳动}
+  market: china
+  url: https://www.doubao.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+- id: kimi
+  name: {en: Kimi, zh: Kimi}
+  maker: {en: Moonshot AI, zh: 月之暗面}
+  market: china
+  url: https://www.kimi.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+
+# ---- Directory only (not in round 01) ----
+- id: caddy
+  name: {en: Caddy, zh: Caddy}
+  maker: {en: Caddy, zh: Caddy}
+  market: global
+  url: https://caddy.app/
+  kind: {en: Personal assistant you text, zh: 发消息就能用的个人助理}
+  status: tracked
+- id: openinstinct
+  name: {en: OpenInstinct, zh: OpenInstinct}
+  maker: {en: Open source, zh: 开源}
+  market: global
+  url: https://openinstinct.sh/
+  kind: {en: Self-hosted personal agent, zh: 自部署个人 agent}
+  status: tracked
+- id: yuanbao
+  name: {en: Yuanbao, zh: 腾讯元宝}
+  maker: {en: Tencent, zh: 腾讯}
+  market: china
+  url: https://yuanbao.tencent.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+- id: coze-space
+  name: {en: Coze Space, zh: 扣子空间}
+  maker: {en: ByteDance, zh: 字节跳动}
+  market: china
+  url: https://www.coze.cn
+  kind: {en: General agent, zh: 通用 agent}
+  status: tracked
+- id: autoglm
+  name: {en: AutoGLM, zh: AutoGLM}
+  maker: {en: Zhipu AI, zh: 智谱}
+  market: china
+  url: https://autoglm.zhipuai.cn
+  kind: {en: Phone and browser agent, zh: 手机与浏览器 agent}
+  status: tracked

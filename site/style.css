@@ -419,3 +419,11 @@ main .gcards a, main .gcards a:hover { text-decoration: none; }
 .chat .bubble { font-size: 18px; border-left-width: 3px; border-left-color: var(--accent); }
 .chat .bubble.sys { font-size: 14.5px; border-left-width: 2px; border-left-color: var(--line); margin-top: 14px; }
 .ph { border-color: var(--line); color: var(--ink-muted); background: var(--surface-alt); border-style: solid; }
+
+/* Hero: single centred column, no card wall. */
+.hero { display: block; text-align: center; padding: 104px var(--inset) 96px; }
+.hero > div { max-width: 920px; margin: 0 auto; }
+.hero h1 { font-size: clamp(44px, 6.4vw, 92px); }
+.hero .lede { margin: 26px auto 34px; max-width: 40rem; }
+.hero .ctas, .hero .fine { justify-content: center; }
+@media (max-width: 900px) { .hero { padding: 56px var(--inset) 56px; } .hero h1 { font-size: 44px; } }
