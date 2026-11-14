@@ -5,31 +5,51 @@
 @font-face { font-family: "Geist Mono"; src: url("/fonts/GeistMono-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 
 :root {
-  color-scheme: light dark;
-  --canvas: light-dark(#ffffff, #111113);
-  --sheet: light-dark(#ffffff, #1c1c1f);
-  --soft: light-dark(#fafafa, #161618);
-  --surface-alt: light-dark(#f4f4f5, #262629);
-  --line: light-dark(#e4e4e7, #36363a);
-  --ink: light-dark(#18181b, #f4f4f5);
-  --ink-muted: light-dark(#52525b, #b4b4bc);
-  --ink-subtle: light-dark(#71717a, #9898a2);
-  --accent: light-dark(#5e3fff, #d9ff43);
+  color-scheme: light;
+  --canvas: #ffffff;
+  --sheet: #ffffff;
+  --soft: #fafafa;
+  --surface-alt: #f4f4f5;
+  --line: #e4e4e7;
+  --ink: #18181b;
+  --ink-muted: #52525b;
+  --ink-subtle: #71717a;
+  --accent: #5e3fff;
   --violet: #8b6fff;
-  --violet-soft: light-dark(#f1edff, #2a2450);
+  --violet-soft: #f1edff;
   --lime: #d9ff43;
   --panel: #18181b;
   --panel-fg: #f4f4f5;
   --panel-muted: #a1a1aa;
-  --danger: light-dark(#c2342a, #f87171);
-  --danger-soft: light-dark(#fdf0ef, #3a1d1b);
-  --pass: light-dark(#3f7a1a, #d9ff43);
+  --danger: #c2342a;
+  --danger-soft: #fdf0ef;
+  --pass: #3f7a1a;
+  --on-accent: #ffffff;
   --r: 14px;
   --display: "Clash Grotesk", "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
   --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
   --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --inset: max(clamp(1.25rem, 5.5556vw, 5rem), calc((100% - 90rem) / 2 + 5rem));
-  --float: 0 12px 32px light-dark(rgb(0 0 0 / .08), rgb(0 0 0 / .45));
+  --float: 0 12px 32px rgb(0 0 0 / .08);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --on-accent: #0e0b1a;
+  --canvas: #111113;
+  --sheet: #1c1c1f;
+  --soft: #161618;
+  --surface-alt: #262629;
+  --line: #36363a;
+  --ink: #f4f4f5;
+  --ink-muted: #b4b4bc;
+  --ink-subtle: #9898a2;
+  --accent: #d9ff43;
+  --violet-soft: #2a2450;
+  --danger: #f87171;
+  --danger-soft: #3a1d1b;
+  --pass: #d9ff43;
+  --float: 0 12px 32px rgb(0 0 0 / .45);
 }
 * { box-sizing: border-box; }
 html { background: var(--canvas); color: var(--ink); font: 400 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
@@ -86,7 +106,7 @@ p { text-wrap: pretty; margin: 0; }
   transition: background-color .15s, color .15s, border-color .15s; white-space: nowrap; }
 .btn:hover { background: var(--surface-alt); color: var(--ink); }
 .btn.primary { background: var(--ink); color: var(--canvas); }
-.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: light-dark(#fff, #0e0b1a); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .btn.sm { min-height: 44px; padding: 0 20px; }
 .btn .arrow { font-family: var(--body); }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -307,3 +327,13 @@ footer a:hover { color: var(--accent); }
 }
 @media (max-width: 560px) { .scorebar { grid-template-columns: 1fr; } .mosaic { display: none; } .brand span { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Theme toggle */
+.theme { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--line);
+  background: var(--sheet); color: var(--ink); cursor: pointer; padding: 0; }
+.theme:hover { border-color: var(--ink); }
+.theme svg { width: 16px; height: 16px; }
+.theme .sun { display: none; }
+html[data-theme="dark"] .theme .sun { display: block; }
+html[data-theme="dark"] .theme .moon { display: none; }
+html[data-theme="dark"] .strip { background-color: #5e3fff; }

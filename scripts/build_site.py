@@ -27,7 +27,7 @@ BOARD_ORDER = ("core", "china_local", "global_local")
 
 T = {
     "en": {
-        "lang": "en", "other": "zh", "other_label": "中文",
+        "lang": "en", "other": "zh", "other_label": "中文", "theme_label": "Switch light / dark",
         "tagline": "Can your AI agent actually [get things done]?",
         "sub": "Real tasks from everyday life. Every run recorded. Every score backed by evidence. US and Chinese agents, in English and Chinese.",
         "nav": [("grid", "Scorecard"), ("agents", "Agents"), ("compare", "Compare"), ("dimensions", "Dimensions"),
@@ -79,7 +79,7 @@ T = {
         "compare_title": "Compare", "method_title": "Method",
     },
     "zh": {
-        "lang": "zh-CN", "other": "en", "other_label": "English",
+        "lang": "zh-CN", "other": "en", "other_label": "English", "theme_label": "切换白色 / 深色",
         "tagline": "你的 AI 助理，|[真的能把事办成]吗？",
         "sub": "用日常生活里的真实任务去测，每次测试都录屏，每个分数都有证据。同时覆盖中国和海外产品，中英双语。",
         "nav": [("grid", "总榜"), ("agents", "产品"), ("compare", "对比"), ("dimensions", "维度"),
@@ -209,6 +209,13 @@ STRIP = {
 }
 
 
+def asset(name):
+    """URL with a content hash, so a new deploy never pairs new HTML with a cached old file."""
+    import hashlib
+    h = hashlib.sha256((SITE / name).read_bytes()).hexdigest()[:10]
+    return f"/{name}?v={h}"
+
+
 def page(L, path, title, body, desc=None, main_class=""):
     t = T[L]
     nav = "".join(f'<a href="/{L}/{slug}/"{" aria-current=page" if path.startswith(slug) else ""}>{e(label)}</a>'
@@ -237,14 +244,15 @@ def page(L, path, title, body, desc=None, main_class=""):
 <meta name="twitter:creator" content="@davidliyangbing">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/ClashGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="{asset('style.css')}">
+<script src="{asset('theme.js')}"></script>
 </head>
 <body>
 <div class="strip"><b>{e(sb)}</b>{e(st)}<a href="/{L}/request/">{e(sl)}</a></div>
 <header class="top">
   <a class="brand" href="/{L}/"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>AgentRealTaskBench</span></a>
   <nav>{nav}</nav>
-  <div class="tools"><a class="lang" href="{alt}" hreflang="{t['other']}">{e(t['other_label'])}</a>
+  <div class="tools"><a class="lang" href="{alt}" hreflang="{t['other']}">{e(t['other_label'])}</a><button class="theme" type="button" aria-label="{e(t['theme_label'])}" title="{e(t['theme_label'])}"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
   <a class="btn primary sm" href="/{L}/request/">{e(t['request'])}</a></div>
 </header>
 <main{' class=' + main_class if main_class else ''}>
@@ -378,7 +386,7 @@ def render_home(L, tasks, agents, table, n_core):
   <div><p class="eyebrow">{e(t['about_title'])}</p><h2>{e("想看哪个 agent 被测？" if zh else "Which agent should we test next?")}</h2><p>{e(t['home_who'])}</p></div>
   <div class="ctas"><a class="btn" href="/{L}/request/">{e(t['request'])} <span class="arrow">→</span></a><a class="btn ghost" href="{X_URL}">{e(t['follow'])}</a></div>
 </section>
-<script src="/home.js"></script>
+<script src="{asset('home.js')}"></script>
 """
     return page(L, "", "", body, main_class="home")
 
@@ -551,7 +559,7 @@ def render_compare(L, agents, dims, table, n_core):
             + f"""<p class="pick"><select id="a" aria-label="A">{opts}</select> <span class="meta">{e(t['versus'])}</span> <select id="b" aria-label="B">{opts}</select></p>
 <table class="runs compare"><tbody id="out"></tbody></table>
 <script id="data" type="application/json">{json.dumps({"agents": data, "labels": labels}, ensure_ascii=False).replace("</", "<\\/")}</script>
-<script src="/compare.js"></script>""")
+<script src="{asset('compare.js')}"></script>""")
     return page(L, "compare/", t["compare_title"], body)
 
 
