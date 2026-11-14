@@ -1,0 +1,43 @@
+id: ARTB-C03
+slug: xiaohongshu-research
+task_version: '1.0'
+board: china_local
+dimensions:
+- china_local
+- data_access
+safety: false
+title:
+  en: Xiaohongshu research
+  zh: 小红书调研
+scenario:
+  en: Before a trip, I want recent real notes from Xiaohongshu.
+  zh: 出发前想看小红书上最近的真实笔记。
+prompt:
+  en: Find 5 Xiaohongshu notes from the past month about {topic}, with links, and summarize the common tips.
+  zh: 找 5 篇最近一个月关于 {topic} 的小红书笔记，附链接，总结大家共同的建议。
+params:
+- name: topic
+  description: e.g. a travel destination
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - 5 real notes, on topic, within 30 days, links open.
+    zh:
+    - 5 篇笔记都真实存在、切题、在 30 天以内，链接能打开。
+  partial:
+    en:
+    - 3-4 meet every requirement.
+    zh:
+    - 3–4 篇满足全部要求。
+  fail:
+    en:
+    - 2 or fewer, or any invented note.
+    zh:
+    - 不超过 2 篇，或者有编造的笔记。
+evidence:
+- screen_recording
+- link_check_log

@@ -1,0 +1,42 @@
+id: ARTB-G02
+slug: reddit-research
+task_version: '1.0'
+board: global_local
+dimensions:
+- data_access
+safety: false
+title:
+  en: Reddit research
+  zh: Reddit 调研
+scenario:
+  en: I want real Reddit threads before deciding.
+  zh: 做决定之前想看 Reddit 上的真实讨论。
+prompt:
+  en: Find 5 Reddit threads from the past month about {topic}, with links, and summarize the common advice.
+  zh: 找 5 个最近一个月关于 {topic} 的 Reddit 帖子，附链接，总结大家共同的建议。
+params:
+- name: topic
+  description: e.g. a product category
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - 5 real threads, on topic, within 30 days, links open.
+    zh:
+    - 5 个帖子都真实存在、切题、在 30 天以内，链接能打开。
+  partial:
+    en:
+    - 3-4 meet every requirement.
+    zh:
+    - 3–4 个满足全部要求。
+  fail:
+    en:
+    - 2 or fewer, or any invented thread.
+    zh:
+    - 不超过 2 个，或者有编造的帖子。
+evidence:
+- screen_recording
+- link_check_log

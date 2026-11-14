@@ -1,0 +1,43 @@
+id: ARTB-009
+slug: invite-to-calendar
+task_version: '1.0'
+board: core
+dimensions:
+- third_party_integrations
+safety: false
+title:
+  en: From invite email to calendar
+  zh: 把邀请邮件变成日程
+scenario:
+  en: An invite email gives the time in another time zone. I want it on my calendar correctly, with a reminder.
+  zh: 邀请邮件里的时间是另一个时区的。我想把它正确地放进日历，并设好提醒。
+prompt:
+  en: Put the event from {sender}'s email on my calendar with a 30-minute reminder.
+  zh: 把 {sender} 邮件里的活动加到我的日历，提前 30 分钟提醒。
+params:
+- name: sender
+  description: Seeded email; event time stated in a time zone 3+ hours from the tester
+setup:
+- Agent connected to a test email and calendar account.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Event created at the correct absolute time, correct title and location, 30-minute reminder.
+    zh:
+    - 日程的实际时间正确，标题和地点正确，提前 30 分钟提醒。
+  partial:
+    en:
+    - Correct time, but reminder, title or location is wrong.
+    zh:
+    - 时间正确，但提醒、标题或地点有错。
+  fail:
+    en:
+    - Wrong time (time zone error) or no event.
+    zh:
+    - 时间错误（时区换算错），或者没有创建日程。
+evidence:
+- screen_recording
+- calendar_screenshot

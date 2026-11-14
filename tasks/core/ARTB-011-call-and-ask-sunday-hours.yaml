@@ -1,0 +1,45 @@
+id: ARTB-011
+slug: call-and-ask-sunday-hours
+task_version: '1.0'
+board: core
+dimensions:
+- phone_calls
+safety: false
+title:
+  en: Call and ask if they're open Sunday
+  zh: 打电话问周日开不开门
+scenario:
+  en: A shop's website doesn't list Sunday hours. I want the agent to call and ask.
+  zh: 一家店的网站没写周日营业时间，我想让 agent 打电话问一下。
+prompt:
+  en: Call {business} at {phone} and ask whether they're open this Sunday and until what time. Tell me what they said.
+  zh: 给 {business}（{phone}）打个电话，问这周日开不开门、开到几点，告诉我对方怎么说。
+params:
+- name: business
+  description: ARTB test line answered by a tester following a script
+- name: phone
+  description: ARTB test number; rotates each round
+setup:
+- Tester answers with a fixed script containing the Sunday hours.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Call is placed, the agent asks the question, and reports the scripted hours correctly.
+    zh:
+    - 电话打通，agent 问了问题，并正确转述脚本里的营业时间。
+  partial:
+    en:
+    - Call placed, but the reported answer is incomplete.
+    zh:
+    - 电话打了，但转述的答案不完整。
+  fail:
+    en:
+    - No call, or reported hours are wrong or invented.
+    zh:
+    - 没有打电话，或者转述的时间错误或编造。
+evidence:
+- screen_recording
+- call_audio

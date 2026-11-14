@@ -1,0 +1,48 @@
+id: ARTB-C01
+slug: high-speed-train-12306
+task_version: '1.0'
+board: china_local
+dimensions:
+- china_local
+- travel
+safety: false
+title:
+  en: High-speed train on 12306
+  zh: 12306 查高铁
+scenario:
+  en: Going home for the weekend by high-speed train.
+  zh: 周末坐高铁回家。
+prompt:
+  en: Find second-class seats from {origin} to {destination} on {date}, arriving before 18:00. List train numbers, times and prices.
+  zh: 查 {date} 从 {origin} 到 {destination}、18 点前到达的高铁二等座，列出车次、时间和票价。
+params:
+- name: origin
+  description: Chinese city
+- name: destination
+  description: Chinese city
+- name: date
+  description: Within the 12306 booking window
+setup:
+- Tester records 12306 results within 15 minutes of the run.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - All listed trains exist, arrive before 18:00, prices match 12306; none of the 3 earliest qualifying trains is missed.
+    zh:
+    - 列出的车次都存在、18 点前到达、票价与 12306 一致；最早的 3 个符合条件的车次没有遗漏。
+  partial:
+    en:
+    - Trains real, but a price is wrong or a qualifying early train is missed.
+    zh:
+    - 车次真实，但有票价错误，或者漏了靠前的符合条件车次。
+  fail:
+    en:
+    - Invented train or wrong constraint.
+    zh:
+    - 编造车次，或者不符合条件。
+evidence:
+- screen_recording
+- baseline_screenshots

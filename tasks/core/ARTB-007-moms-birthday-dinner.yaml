@@ -1,0 +1,44 @@
+id: ARTB-007
+slug: moms-birthday-dinner
+task_version: '1.0'
+board: core
+dimensions:
+- recommendation_quality
+safety: false
+title:
+  en: Mom's 60th birthday dinner
+  zh: 妈妈 60 岁生日晚饭
+scenario:
+  en: Eight of us, a quiet private room, near a specific area, within a budget.
+  zh: 8 个人，要安静的包间，在指定区域附近，人均在预算内。
+prompt:
+  en: Recommend 3 restaurants near {area} for my mom's 60th birthday. 8 people, private room, about {budget} per person. Tell me why each one fits.
+  zh: 给我妈 60 岁生日推荐 {area} 附近的 3 家餐厅，8 个人，要包间，人均 {budget} 左右，说说每家为什么合适。
+params:
+- name: area
+  description: A real neighborhood in the test city
+- name: budget
+  description: Local currency amount
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - All 3 exist and are open, have private rooms (verified by phone or listing), and are within 30% of the budget.
+    zh:
+    - 3 家都真实存在且在营业，有包间（电话或页面核实），人均在预算上下 30% 以内。
+  partial:
+    en:
+    - 2 of 3 meet every constraint.
+    zh:
+    - 3 家里有 2 家满足全部条件。
+  fail:
+    en:
+    - Fewer than 2 meet every constraint, or any restaurant is invented.
+    zh:
+    - 满足全部条件的不到 2 家，或者有任何一家是编造的。
+evidence:
+- screen_recording
+- verification_notes

@@ -1,0 +1,43 @@
+id: ARTB-018
+slug: what-changed-in-the-latest-release
+task_version: '1.0'
+board: core
+dimensions:
+- data_access
+safety: false
+title:
+  en: What changed in the latest release?
+  zh: 最新版本改了什么？
+scenario:
+  en: An app I use just updated. I want to know what changed, from the official source.
+  zh: 我用的一个 App 刚更新，我想从官方渠道知道改了什么。
+prompt:
+  en: What's the latest version of {software} and what changed? Link the official release notes.
+  zh: '{software} 最新版本是多少，改了什么？附上官方更新说明的链接。'
+params:
+- name: software
+  description: Software with a public changelog and a release in the past 14 days
+setup:
+- Tester records the latest version from the official changelog at run time.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Correct latest version, at least 2 correct changes, official link.
+    zh:
+    - 最新版本号正确，至少 2 条改动正确，链接是官方的。
+  partial:
+    en:
+    - Correct version, but changes or link incomplete.
+    zh:
+    - 版本号正确，但改动或链接不完整。
+  fail:
+    en:
+    - Outdated version or invented changes.
+    zh:
+    - 版本过时，或者编造改动。
+evidence:
+- screen_recording
+- changelog_screenshot

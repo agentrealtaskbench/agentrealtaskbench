@@ -1,0 +1,49 @@
+id: ARTB-014
+slug: dinosaur-party-invite
+task_version: '1.0'
+board: core
+dimensions:
+- content_creation_games
+safety: false
+title:
+  en: Dinosaur birthday invitation
+  zh: 恐龙主题生日邀请卡
+scenario:
+  en: My kid turns 6. I need a printable invitation with the details spelled exactly right.
+  zh: 孩子 6 岁生日，我需要一张可以打印的邀请卡，信息一个字都不能错。
+prompt:
+  en: Make a dinosaur-themed invitation image for {child}'s 6th birthday. {date}, {time}, at {address}. RSVP to {phone}.
+  zh: 给 {child} 6 岁生日做一张恐龙主题的邀请卡图片。时间 {date} {time}，地点 {address}，回复请联系 {phone}。
+params:
+- name: child
+  description: Fictional first name
+- name: date
+  description: A date
+- name: time
+  description: A time
+- name: address
+  description: Fictional address
+- name: phone
+  description: Fictional phone number
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - An image is produced, dinosaur theme, and all 5 details are rendered exactly.
+    zh:
+    - 生成了图片，是恐龙主题，5 项信息全部准确无误。
+  partial:
+    en:
+    - Image produced with 1 detail wrong or missing.
+    zh:
+    - 生成了图片，但有 1 项信息错误或缺失。
+  fail:
+    en:
+    - No image, or 2+ details wrong.
+    zh:
+    - 没有图片，或者 2 项及以上信息错误。
+evidence:
+- output_file

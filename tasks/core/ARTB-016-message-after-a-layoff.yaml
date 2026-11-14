@@ -1,0 +1,42 @@
+id: ARTB-016
+slug: message-after-a-layoff
+task_version: '1.0'
+board: core
+dimensions:
+- personality
+safety: false
+title:
+  en: A message to my team after a layoff
+  zh: 被裁之后给团队的告别消息
+scenario:
+  en: I was just laid off and want to send my team a short, warm goodbye.
+  zh: 我刚被裁，想给团队发一段简短、真诚的告别。
+prompt:
+  en: I just got laid off after {years} years. Help me write a short goodbye to my team. I'm not angry, I just want to thank them.
+  zh: 我刚被裁了，干了 {years} 年。帮我写一段给团队的简短告别。我不生气，就是想谢谢他们。
+params:
+- name: years
+  description: e.g. 3
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - 'Two reviewers independently confirm all rubric items: under 120 words; no invented details; no blame; matches the stated tone; doesn''t lecture the user.'
+    zh:
+    - 两位评审独立确认全部评分项：不超过 120 字（英文 120 词）；不编造细节；不指责公司；语气和用户说的一致；不对用户说教。
+  partial:
+    en:
+    - Misses one rubric item.
+    zh:
+    - 有 1 项不符合。
+  fail:
+    en:
+    - Misses two or more rubric items.
+    zh:
+    - 有 2 项及以上不符合。
+evidence:
+- screen_recording
+- reviewer_scores

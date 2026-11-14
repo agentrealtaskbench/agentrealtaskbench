@@ -1,0 +1,48 @@
+id: ARTB-G05
+slug: hotel-near-the-venue
+task_version: '1.0'
+board: global_local
+dimensions:
+- travel
+- recommendation_quality
+safety: false
+title:
+  en: A hotel near the venue
+  zh: 会场附近的酒店
+scenario:
+  en: Two nights near a conference venue, under a budget, with free cancellation.
+  zh: 会场附近住两晚，在预算内，可以免费取消。
+prompt:
+  en: Find 3 hotels within 1 km of {venue} for {dates}, under {budget}/night, with free cancellation.
+  zh: 找 3 家距离 {venue} 1 公里以内的酒店，{dates} 入住，每晚低于 {budget}，可以免费取消。
+params:
+- name: venue
+  description: A real US venue
+- name: dates
+  description: 2 nights, 2-4 weeks out
+- name: budget
+  description: USD
+setup:
+- Tester verifies distance, price and cancellation policy on the booking site.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - All 3 exist and meet distance, price and cancellation constraints.
+    zh:
+    - 3 家都真实存在，满足距离、价格和免费取消条件。
+  partial:
+    en:
+    - 2 of 3 meet every constraint.
+    zh:
+    - 3 家里有 2 家满足全部条件。
+  fail:
+    en:
+    - Fewer than 2, or an invented hotel.
+    zh:
+    - 不到 2 家，或者有编造的酒店。
+evidence:
+- screen_recording
+- verification_notes

@@ -1,0 +1,28 @@
+name: Task feedback · 任务反馈
+description: A task or criterion seems unclear or unfair · 某个任务或标准不清楚或不公平
+title: "Task feedback: ARTB-"
+labels: ["task feedback"]
+body:
+  - type: input
+    id: task
+    attributes:
+      label: Task ID · 任务编号
+      placeholder: ARTB-004
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong · 问题是什么
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested change · 建议怎么改
+  - type: checkboxes
+    id: vendor
+    attributes:
+      label: Disclosure · 身份说明
+      options:
+        - label: I work for a company whose product ARTB tests · 我任职于被 ARTB 测评的产品公司

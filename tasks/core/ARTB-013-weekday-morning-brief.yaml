@@ -1,0 +1,42 @@
+id: ARTB-013
+slug: weekday-morning-brief
+task_version: '1.0'
+board: core
+dimensions:
+- running_routine
+safety: false
+title:
+  en: A 3-line brief every weekday morning
+  zh: 每个工作日早上 3 行简报
+scenario:
+  en: I want a short news brief on a topic I care about, every weekday at 8.
+  zh: 我想每个工作日早上 8 点收到一份关于某个话题的简短简报。
+prompt:
+  en: Every weekday at 8:00, send me 3 lines on the most important {topic} news from the past 24 hours, with a link for each.
+  zh: 每个工作日早上 8 点，用 3 行告诉我过去 24 小时最重要的 {topic} 新闻，每条附链接。
+params:
+- name: topic
+  description: e.g. AI agents
+setup:
+- Observe 3 consecutive weekdays.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - 3 of 3 briefs arrive within 15 minutes of 8:00; each has ≤3 items, working links, and news from the past 48 hours.
+    zh:
+    - 3 天都在 8 点前后 15 分钟内收到；每份不超过 3 条，链接能打开，新闻在 48 小时以内。
+  partial:
+    en:
+    - 2 of 3 days meet every requirement.
+    zh:
+    - 3 天里有 2 天满足全部要求。
+  fail:
+    en:
+    - 1 day or fewer meets every requirement.
+    zh:
+    - 满足全部要求的不超过 1 天。
+evidence:
+- screenshots_each_day

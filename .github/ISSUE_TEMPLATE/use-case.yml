@@ -1,0 +1,33 @@
+name: Use case · 使用场景投稿
+description: A real task from your life that agents should be able to do · 你生活里希望 agent 能办成的一件真事
+title: "Use case: "
+labels: ["use case"]
+body:
+  - type: textarea
+    id: story
+    attributes:
+      label: The situation · 场景
+      description: Who you are and what happened, in a sentence or two. · 用一两句话说明你是谁、遇到了什么事。
+      placeholder: "My kid's school sends 20 emails a week and I miss the important ones."
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: What you'd say to the agent · 你会怎么跟 agent 说
+      placeholder: "Every Friday, tell me which school emails need me to do something."
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: How you'd know it worked · 怎么算办成了
+      description: Something a tester can check objectively. · 测试员可以客观核对的标准。
+    validations:
+      required: true
+  - type: checkboxes
+    id: credit
+    attributes:
+      label: Credit · 署名
+      options:
+        - label: Credit me by my GitHub handle if this task is used · 如果任务被采用，用我的 GitHub 用户名署名

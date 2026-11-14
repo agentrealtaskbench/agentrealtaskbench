@@ -1,0 +1,44 @@
+id: ARTB-G01
+slug: amazon-walmart-price
+task_version: '1.0'
+board: global_local
+dimensions:
+- purchasing
+- data_access
+safety: false
+title:
+  en: Amazon vs Walmart vs Target
+  zh: Amazon、Walmart、Target 比价
+scenario:
+  en: Same exact item, which store is cheapest today?
+  zh: 同一件商品，今天哪家最便宜？
+prompt:
+  en: Compare the price of {product} on Amazon, Walmart and Target right now. Give links.
+  zh: 比较 {product} 现在在 Amazon、Walmart、Target 的价格，附链接。
+params:
+- name: product
+  description: A specific SKU
+setup:
+- Tester records the three prices (US region) within 15 minutes.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - All 3 prices within 5% of the baseline, same SKU, working links, correct cheapest store.
+    zh:
+    - 3 个价格都与基准相差不超过 5%，是同一型号，链接能打开，最便宜的店判断正确。
+  partial:
+    en:
+    - 2 of 3 prices correct.
+    zh:
+    - 3 个价格里有 2 个正确。
+  fail:
+    en:
+    - 1 or fewer correct, or an invented price.
+    zh:
+    - 正确的不超过 1 个，或者编造价格。
+evidence:
+- screen_recording
+- baseline_screenshots

@@ -1,0 +1,44 @@
+id: ARTB-C05
+slug: parcel-tracking-cn
+task_version: '1.0'
+board: china_local
+dimensions:
+- china_local
+- data_access
+safety: false
+title:
+  en: Where is my parcel?
+  zh: 我的快递到哪了？
+scenario:
+  en: I have a tracking number and no idea which courier it is.
+  zh: 我只有一个快递单号，不知道是哪家快递。
+prompt:
+  en: Where is parcel {tracking_number} now, and when will it arrive?
+  zh: 快递 {tracking_number} 现在到哪了？什么时候到？
+params:
+- name: tracking_number
+  description: A real in-transit tracking number from a test order
+setup:
+- Tester records the courier's official status at run time.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Correct courier and latest status matching the official tracker.
+    zh:
+    - 快递公司识别正确，最新状态与官方查询一致。
+  partial:
+    en:
+    - Correct courier, outdated status.
+    zh:
+    - 快递公司正确，但状态过时。
+  fail:
+    en:
+    - Wrong courier or invented status.
+    zh:
+    - 快递公司错误，或者编造状态。
+evidence:
+- screen_recording
+- baseline_screenshots

@@ -1,0 +1,43 @@
+id: ARTB-017
+slug: what-are-people-saying
+task_version: '1.0'
+board: core
+dimensions:
+- data_access
+- recommendation_quality
+safety: false
+title:
+  en: What are people saying about it this week?
+  zh: 这周大家都在怎么说它？
+scenario:
+  en: Before I buy a product, I want to know what real users posted about it in the last week.
+  zh: 买东西之前，我想知道最近一周真实用户都发了什么。
+prompt:
+  en: What are people saying about {product} on social media this week? Give me 5 real posts with links and a one-line takeaway.
+  zh: 这周社交媒体上大家怎么评价 {product}？给我 5 条真实的帖子和链接，再用一句话总结。
+params:
+- name: product
+  description: A consumer product launched or updated in the past month
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - 5 links open to real posts about the product, each posted within the past 7 days.
+    zh:
+    - 5 个链接都能打开，都是关于这个产品的真实帖子，都发布于 7 天以内。
+  partial:
+    en:
+    - 3-4 links meet every requirement.
+    zh:
+    - 3–4 个链接满足全部要求。
+  fail:
+    en:
+    - 2 or fewer, or any invented post or link.
+    zh:
+    - 不超过 2 个，或者有任何编造的帖子或链接。
+evidence:
+- screen_recording
+- link_check_log

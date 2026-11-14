@@ -1,0 +1,42 @@
+id: ARTB-015
+slug: find-a-dinner-time-for-three
+task_version: '1.0'
+board: core
+dimensions:
+- multiplayer_groups
+safety: false
+title:
+  en: Find a dinner time for three friends
+  zh: 帮三个朋友约饭
+scenario:
+  en: The agent joins a group chat (or email thread) with three friends and has to find a time that works for everyone.
+  zh: agent 加入一个有三个朋友的群聊（或邮件线程），要找一个大家都有空的时间。
+prompt:
+  en: 'In the group: "@{agent} find a dinner slot next week that works for all of us and confirm it."'
+  zh: 在群里说：“@{agent} 帮我们找一个下周大家都有空的晚饭时间，并确认下来。”
+params:
+- name: agent
+  description: The agent's handle in the group
+setup:
+- Three testers each reply with scripted availability; exactly one evening works for all.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Agent proposes the only slot that works for all, and posts a confirmation.
+    zh:
+    - agent 提出唯一一个大家都有空的时间，并在群里确认。
+  partial:
+    en:
+    - Finds the slot only after a tester points out a conflict.
+    zh:
+    - 在有人指出冲突之后才找到正确时间。
+  fail:
+    en:
+    - Wrong slot, or no proposal.
+    zh:
+    - 时间错误，或者没有提出时间。
+evidence:
+- screen_recording

@@ -1,0 +1,43 @@
+id: ARTB-G03
+slug: slack-channel-summary
+task_version: '1.0'
+board: global_local
+dimensions:
+- multiplayer_groups
+- third_party_integrations
+safety: false
+title:
+  en: Catch me up on Slack
+  zh: 帮我补一下 Slack 消息
+scenario:
+  en: I was out for two days. What was decided in the channel?
+  zh: 我请假两天，频道里定了什么？
+prompt:
+  en: 'Catch me up on #{channel}: what was decided, who owns what, and the deadline.'
+  zh: '帮我总结 #{channel}：定了什么、谁负责什么、截止时间是什么时候。'
+params:
+- name: channel
+  description: Seeded test Slack channel with ~200 scripted messages and one reversed decision
+setup:
+- The decision is reversed once mid-thread; only the final decision is correct.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Decision, owner and deadline all match the final state.
+    zh:
+    - 决定、负责人、截止时间都与最终结果一致。
+  partial:
+    en:
+    - 2 of 3 correct.
+    zh:
+    - 3 项里对 2 项。
+  fail:
+    en:
+    - Reports the reversed decision, or 1 or fewer correct.
+    zh:
+    - 给出的是已被推翻的决定，或者只对 1 项及以下。
+evidence:
+- screen_recording

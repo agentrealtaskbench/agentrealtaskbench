@@ -1,0 +1,43 @@
+id: ARTB-C04
+slug: family-group-summary
+task_version: '1.0'
+board: china_local
+dimensions:
+- china_local
+- multiplayer_groups
+safety: false
+title:
+  en: 300 messages in the family group
+  zh: 家族群 300 条消息
+scenario:
+  en: I only want to know who is hosting New Year dinner and when.
+  zh: 我只想知道过年谁家请客、什么时候。
+prompt:
+  en: 'Summarize the {group} chat: who is hosting New Year dinner, what date, and what I need to bring.'
+  zh: 总结一下 {group} 群聊：过年谁家请客、哪天、我要带什么。
+params:
+- name: group
+  description: Seeded WeChat or Feishu test group with ~300 scripted messages and one plan change
+setup:
+- The plan changes once mid-thread; only the final plan is correct.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Host, date and item all match the final plan.
+    zh:
+    - 请客的人、日期、要带的东西都和最终方案一致。
+  partial:
+    en:
+    - 2 of 3 correct.
+    zh:
+    - 3 项里对 2 项。
+  fail:
+    en:
+    - Reports the outdated plan, or 1 or fewer correct.
+    zh:
+    - 给出的是过时的方案，或者只对 1 项及以下。
+evidence:
+- screen_recording

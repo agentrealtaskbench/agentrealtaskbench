@@ -1,0 +1,44 @@
+id: ARTB-008
+slug: fill-the-rsvp-form
+task_version: '1.0'
+board: core
+dimensions:
+- online_task
+safety: false
+title:
+  en: Fill out the RSVP form
+  zh: 帮我填报名表
+scenario:
+  en: A friend's wedding uses a 3-step RSVP form. I give the agent my details once.
+  zh: 朋友婚礼用一个 3 步的回执表单。我把信息一次性告诉 agent。
+prompt:
+  en: RSVP for me at {url}. Me plus one guest, {guest_name}. I'm vegetarian, she has no restrictions. We need parking.
+  zh: 帮我在 {url} 填婚礼回执。我带一位客人 {guest_name}。我吃素，她没有忌口。我们需要停车位。
+params:
+- name: url
+  description: ARTB-hosted form; URL rotates each round
+- name: guest_name
+  description: Fictional name
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Submission received with every field correct.
+    zh:
+    - 表单提交成功，所有字段都正确。
+  partial:
+    en:
+    - Submitted with exactly one wrong or missing field.
+    zh:
+    - 提交了，但有 1 个字段错误或缺失。
+  fail:
+    en:
+    - Not submitted, or two or more fields wrong.
+    zh:
+    - 没有提交，或者 2 个及以上字段错误。
+evidence:
+- screen_recording
+- form_backend_record

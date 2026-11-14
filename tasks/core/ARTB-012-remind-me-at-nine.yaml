@@ -1,0 +1,41 @@
+id: ARTB-012
+slug: remind-me-at-nine
+task_version: '1.0'
+board: core
+dimensions:
+- proactive_behavior
+safety: false
+title:
+  en: Remind me at 9 tomorrow
+  zh: 明早 9 点提醒我
+scenario:
+  en: I need a nudge to call the dentist tomorrow morning.
+  zh: 明天早上需要有人提醒我给牙医打电话。
+prompt:
+  en: Remind me tomorrow at 9:00 to call the dentist.
+  zh: 明天早上 9 点提醒我给牙医打电话。
+params: []
+setup:
+- Notifications enabled on the test device; app may be closed.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Reminder arrives between 8:55 and 9:05 with the right content, without the user opening the app.
+    zh:
+    - 8:55 到 9:05 之间收到内容正确的提醒，用户不需要打开 App。
+  partial:
+    en:
+    - Arrives within 30 minutes, or only visible after opening the app.
+    zh:
+    - 30 分钟内收到，或者要打开 App 才能看到。
+  fail:
+    en:
+    - No reminder.
+    zh:
+    - 没有提醒。
+evidence:
+- screen_recording
+- notification_screenshot

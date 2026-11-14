@@ -1,0 +1,43 @@
+id: ARTB-G04
+slug: parcel-tracking-us
+task_version: '1.0'
+board: global_local
+dimensions:
+- data_access
+safety: false
+title:
+  en: Where is my package?
+  zh: 我的包裹到哪了？（美国）
+scenario:
+  en: I have a tracking number and don't know if it's USPS, UPS or FedEx.
+  zh: 我有一个单号，不知道是 USPS、UPS 还是 FedEx。
+prompt:
+  en: Where is package {tracking_number} now, and when will it arrive?
+  zh: 包裹 {tracking_number} 现在到哪了？什么时候到？
+params:
+- name: tracking_number
+  description: A real in-transit tracking number from a test order
+setup:
+- Tester records the carrier's official status at run time.
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Correct carrier and latest status matching the official tracker.
+    zh:
+    - 承运商识别正确，最新状态与官方查询一致。
+  partial:
+    en:
+    - Correct carrier, outdated status.
+    zh:
+    - 承运商正确，但状态过时。
+  fail:
+    en:
+    - Wrong carrier or invented status.
+    zh:
+    - 承运商错误，或者编造状态。
+evidence:
+- screen_recording
+- baseline_screenshots

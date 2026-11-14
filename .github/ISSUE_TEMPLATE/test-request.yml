@@ -1,0 +1,33 @@
+name: Test request · 测评请求
+description: Ask us to test an agent · 请我们测某个 agent
+title: "Test request: "
+labels: ["test request"]
+body:
+  - type: input
+    id: agent
+    attributes:
+      label: Agent name · 产品名
+      placeholder: e.g. Kimi, Manus, ChatGPT agent
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Website or download link · 官网或下载链接
+    validations:
+      required: true
+  - type: dropdown
+    id: region
+    attributes:
+      label: Main market · 主要市场
+      options: ["China · 中国", "Global · 海外", "Both · 都有"]
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why should we test it? · 为什么值得测？
+      description: What do you use it for? Any task you'd especially like to see? · 你用它做什么？特别想看哪个任务？
+  - type: markdown
+    attributes:
+      value: "👍 this issue to vote. We schedule by votes. · 给这个 issue 点 👍 投票，我们按票数排期。"

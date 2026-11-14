@@ -1,0 +1,46 @@
+id: ARTB-019
+slug: research-to-spreadsheet-to-email
+task_version: '1.0'
+board: core
+dimensions:
+- chained_tasks
+- data_access
+safety: false
+title:
+  en: Research, spreadsheet, email
+  zh: 查资料、做表格、发邮件
+scenario:
+  en: I want a short comparison table of open-source projects, saved as a sheet and emailed to me.
+  zh: 我想要一张开源项目对比表，存成表格并发到我邮箱。
+prompt:
+  en: Find 3 popular open-source {category} projects on GitHub. Put name, stars and last commit date in a spreadsheet and email it to {me}.
+  zh: 在 GitHub 上找 3 个热门的开源 {category} 项目，把名字、star 数、最近提交日期做成表格，发到 {me}。
+params:
+- name: category
+  description: e.g. personal AI agent
+- name: me
+  description: Test mailbox
+setup: []
+limits:
+  time_limit_min: 30
+  neutral_follow_ups: 1
+criteria:
+  pass:
+    en:
+    - Email arrives with a spreadsheet; 3 real projects; stars within 5% and dates correct at run time.
+    zh:
+    - 收到带表格的邮件；3 个项目真实存在；star 数误差不超过 5%，日期正确。
+  partial:
+    en:
+    - Email arrives, but one value is wrong or the table is pasted as text.
+    zh:
+    - 收到邮件，但有 1 个数值错误，或者表格是直接粘在正文里的文字。
+  fail:
+    en:
+    - No email, or 2+ wrong values, or an invented project.
+    zh:
+    - 没有收到邮件，或者 2 个及以上数值错误，或者有编造的项目。
+evidence:
+- screen_recording
+- received_email
+- github_snapshot
