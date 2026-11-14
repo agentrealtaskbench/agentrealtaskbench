@@ -2,6 +2,7 @@ id: ARTB-008
 slug: fill-the-rsvp-form
 task_version: '1.0'
 board: core
+category: web
 dimensions:
 - online_task
 safety: false

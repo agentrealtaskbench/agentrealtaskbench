@@ -2,6 +2,7 @@ id: ARTB-002
 slug: midnight-email-from-boss
 task_version: '1.0'
 board: core
+category: comms
 dimensions:
 - email_replies
 - proactive_restraint

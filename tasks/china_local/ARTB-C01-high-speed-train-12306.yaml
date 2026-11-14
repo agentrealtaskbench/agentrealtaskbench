@@ -2,6 +2,7 @@ id: ARTB-C01
 slug: high-speed-train-12306
 task_version: '1.0'
 board: china_local
+category: travel
 dimensions:
 - china_local
 - travel

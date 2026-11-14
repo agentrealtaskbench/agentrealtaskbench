@@ -2,6 +2,7 @@ id: ARTB-014
 slug: dinosaur-party-invite
 task_version: '1.0'
 board: core
+category: files
 dimensions:
 - content_creation_games
 safety: false

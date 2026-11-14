@@ -2,6 +2,7 @@ id: ARTB-011
 slug: call-and-ask-sunday-hours
 task_version: '1.0'
 board: core
+category: comms
 dimensions:
 - phone_calls
 safety: false

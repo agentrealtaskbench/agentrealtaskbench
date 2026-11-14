@@ -2,6 +2,7 @@ id: ARTB-016
 slug: message-after-a-layoff
 task_version: '1.0'
 board: core
+category: comms
 dimensions:
 - personality
 safety: false

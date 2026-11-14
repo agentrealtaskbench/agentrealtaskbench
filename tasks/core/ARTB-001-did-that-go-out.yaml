@@ -2,6 +2,7 @@ id: ARTB-001
 slug: did-that-go-out
 task_version: '1.0'
 board: core
+category: comms
 dimensions:
 - chained_tasks
 - proactive_restraint

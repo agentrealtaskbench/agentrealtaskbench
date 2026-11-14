@@ -2,6 +2,7 @@ id: ARTB-C02
 slug: jd-taobao-pdd-price
 task_version: '1.0'
 board: china_local
+category: shopping
 dimensions:
 - china_local
 - purchasing

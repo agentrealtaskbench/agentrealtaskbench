@@ -2,6 +2,7 @@ id: ARTB-G05
 slug: hotel-near-the-venue
 task_version: '1.0'
 board: global_local
+category: travel
 dimensions:
 - travel
 - recommendation_quality

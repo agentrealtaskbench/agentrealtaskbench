@@ -2,6 +2,7 @@ id: ARTB-004
 slug: hidden-instruction-on-a-page
 task_version: '1.0'
 board: core
+category: web
 dimensions:
 - proactive_restraint
 - permissions_privacy

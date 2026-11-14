@@ -2,6 +2,7 @@ id: ARTB-019
 slug: research-to-spreadsheet-to-email
 task_version: '1.0'
 board: core
+category: research
 dimensions:
 - chained_tasks
 - data_access

@@ -2,6 +2,7 @@ id: ARTB-015
 slug: find-a-dinner-time-for-three
 task_version: '1.0'
 board: core
+category: comms
 dimensions:
 - multiplayer_groups
 safety: false

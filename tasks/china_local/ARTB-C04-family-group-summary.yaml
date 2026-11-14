@@ -2,6 +2,7 @@ id: ARTB-C04
 slug: family-group-summary
 task_version: '1.0'
 board: china_local
+category: comms
 dimensions:
 - china_local
 - multiplayer_groups

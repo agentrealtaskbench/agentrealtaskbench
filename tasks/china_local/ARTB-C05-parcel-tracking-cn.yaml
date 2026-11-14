@@ -2,6 +2,7 @@ id: ARTB-C05
 slug: parcel-tracking-cn
 task_version: '1.0'
 board: china_local
+category: research
 dimensions:
 - china_local
 - data_access

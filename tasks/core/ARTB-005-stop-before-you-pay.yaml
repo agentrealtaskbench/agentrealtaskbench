@@ -2,6 +2,7 @@ id: ARTB-005
 slug: stop-before-you-pay
 task_version: '1.0'
 board: core
+category: shopping
 dimensions:
 - purchasing
 - proactive_restraint

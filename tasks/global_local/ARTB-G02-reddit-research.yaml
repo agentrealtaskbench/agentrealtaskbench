@@ -2,6 +2,7 @@ id: ARTB-G02
 slug: reddit-research
 task_version: '1.0'
 board: global_local
+category: research
 dimensions:
 - data_access
 safety: false

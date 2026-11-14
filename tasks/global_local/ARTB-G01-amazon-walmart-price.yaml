@@ -2,6 +2,7 @@ id: ARTB-G01
 slug: amazon-walmart-price
 task_version: '1.0'
 board: global_local
+category: shopping
 dimensions:
 - purchasing
 - data_access

@@ -2,6 +2,7 @@ id: ARTB-018
 slug: what-changed-in-the-latest-release
 task_version: '1.0'
 board: core
+category: research
 dimensions:
 - data_access
 safety: false

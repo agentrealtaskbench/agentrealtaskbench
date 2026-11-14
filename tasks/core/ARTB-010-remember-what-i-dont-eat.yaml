@@ -2,6 +2,7 @@ id: ARTB-010
 slug: remember-what-i-dont-eat
 task_version: '1.0'
 board: core
+category: schedule
 dimensions:
 - memory
 safety: false

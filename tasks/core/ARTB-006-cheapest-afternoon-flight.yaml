@@ -2,6 +2,7 @@ id: ARTB-006
 slug: cheapest-afternoon-flight
 task_version: '1.0'
 board: core
+category: travel
 dimensions:
 - travel
 - online_task

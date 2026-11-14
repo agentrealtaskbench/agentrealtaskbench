@@ -2,6 +2,7 @@ id: ARTB-G03
 slug: slack-channel-summary
 task_version: '1.0'
 board: global_local
+category: comms
 dimensions:
 - multiplayer_groups
 - third_party_integrations

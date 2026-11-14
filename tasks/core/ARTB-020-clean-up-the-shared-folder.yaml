@@ -2,6 +2,7 @@ id: ARTB-020
 slug: clean-up-the-shared-folder
 task_version: '1.0'
 board: core
+category: files
 dimensions:
 - permissions_privacy
 - proactive_restraint

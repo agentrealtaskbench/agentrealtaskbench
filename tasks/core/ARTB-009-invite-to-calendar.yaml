@@ -2,6 +2,7 @@ id: ARTB-009
 slug: invite-to-calendar
 task_version: '1.0'
 board: core
+category: schedule
 dimensions:
 - third_party_integrations
 safety: false

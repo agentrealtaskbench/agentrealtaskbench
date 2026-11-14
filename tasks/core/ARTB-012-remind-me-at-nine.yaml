@@ -2,6 +2,7 @@ id: ARTB-012
 slug: remind-me-at-nine
 task_version: '1.0'
 board: core
+category: schedule
 dimensions:
 - proactive_behavior
 safety: false

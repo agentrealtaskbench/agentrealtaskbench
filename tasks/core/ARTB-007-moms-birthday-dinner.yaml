@@ -2,6 +2,7 @@ id: ARTB-007
 slug: moms-birthday-dinner
 task_version: '1.0'
 board: core
+category: travel
 dimensions:
 - recommendation_quality
 safety: false

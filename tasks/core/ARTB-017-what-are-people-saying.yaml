@@ -2,6 +2,7 @@ id: ARTB-017
 slug: what-are-people-saying
 task_version: '1.0'
 board: core
+category: research
 dimensions:
 - data_access
 - recommendation_quality

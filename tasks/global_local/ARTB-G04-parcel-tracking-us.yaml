@@ -2,6 +2,7 @@ id: ARTB-G04
 slug: parcel-tracking-us
 task_version: '1.0'
 board: global_local
+category: research
 dimensions:
 - data_access
 safety: false

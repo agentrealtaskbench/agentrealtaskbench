@@ -2,6 +2,7 @@ id: ARTB-013
 slug: weekday-morning-brief
 task_version: '1.0'
 board: core
+category: schedule
 dimensions:
 - running_routine
 safety: false
