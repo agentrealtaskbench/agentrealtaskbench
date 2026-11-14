@@ -4,6 +4,8 @@
   var root = document.documentElement;
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
+  var q = /[?&]theme=(dark|light)\b/.exec(location.search);
+  if (q) saved = q[1];
   if (saved === "dark") root.setAttribute("data-theme", "dark");
 
   document.addEventListener("DOMContentLoaded", function () {

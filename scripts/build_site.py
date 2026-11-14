@@ -248,9 +248,9 @@ def page(L, path, title, body, desc=None, main_class=""):
 <script src="{asset('theme.js')}"></script>
 </head>
 <body>
-<div class="strip"><b>{e(sb)}</b>{e(st)}<a href="/{L}/request/">{e(sl)}</a></div>
+<div class="strip"><b>{e(sb)}</b><span class="long">{e(st)}</span><a href="/{L}/request/">{e(sl)}</a></div>
 <header class="top">
-  <a class="brand" href="/{L}/"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>AgentRealTaskBench</span></a>
+  <a class="brand" href="/{L}/"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="bname">AgentRealTaskBench</span></a>
   <nav>{nav}</nav>
   <div class="tools"><a class="lang" href="{alt}" hreflang="{t['other']}">{e(t['other_label'])}</a><button class="theme" type="button" aria-label="{e(t['theme_label'])}" title="{e(t['theme_label'])}"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
   <a class="btn primary sm" href="/{L}/request/">{e(t['request'])}</a></div>
@@ -374,6 +374,8 @@ def render_home(L, tasks, agents, table, n_core):
   <p class="lede">{e("每个任务都是用户会对助理说的原话。点开任意一张卡，看完整的场景、打断方式和判定标准。" if zh else "Each task is something a person would actually say to an assistant. Open any card to see the full setup, the interruption and how it is judged.")}</p></div>
   <div class="tabs" role="group">{tab_html}</div>
   <div class="tgrid" id="tgrid">{cards}</div>
+  <p class="showall"><button type="button" class="btn" id="more" data-more="{e("显示全部任务" if zh else "Show all tasks")}" data-less="{e("收起" if zh else "Show fewer")}">{e("显示全部任务" if zh else "Show all tasks")}</button>
+  <a class="more" href="/{L}/tasks/">{e(t['tasks_title'])}</a></p>
 </section>
 <section class="section tint">
   <div class="shead"><h2>{e("看证据打分，不看演示。" if zh else "Scored on evidence, not demos.")}</h2>
@@ -401,8 +403,15 @@ def render_grid(L, tasks, agents, dims, table, n_core):
         full = r["coverage"] * 4 >= n_core * 3  # at least 75% of core tasks tested
         return (not full, 0 if full else -r["coverage"],
                 -(r["overall"] if r["overall"] is not None else -1), a["id"])
+    gcards = []
     for a in sorted(agents, key=rank):
         r = table[a["id"]]
+        flag = f' <span class="status violation">{r["violations"]}× {e(t["outcome"]["violation"])}</span>' if r["violations"] else ""
+        gcards.append(f'<li><a href="/{L}/agents/{a["id"]}/"><span class="gname"><b>{e(agent_name(a, L))}</b><small>{e(a["maker"][L])} · {e(t["market"][a["market"]])}</small></span>'
+                      f'<span class="gnum"><span class="score-label">{e(t["overall"])}</span>{fmt(r["overall"], L)}</span>'
+                      f'<span class="gnum"><span class="score-label">{e(t["safety"])}</span>{fmt(r["safety"], L)}</span>'
+                      f'<span class="gnum"><span class="score-label">{e(t["coverage"])}</span><span class="score">{r["coverage"]}/{n_core}</span></span>'
+                      + (f'<span class="gflag">{flag}</span>' if r["violations"] else "") + '</a></li>')
         flag = f' <span class="status violation">{r["violations"]}× {e(t["outcome"]["violation"])}</span>' if r["violations"] else ""
         cells = "".join(f"<td>{fmt(r['dims'][d['id']], L)}</td>" for d in dims)
         rows.append(f'<tr><th scope="row"><a href="/{L}/agents/{a["id"]}/">{e(agent_name(a, L))}</a>'
@@ -412,7 +421,7 @@ def render_grid(L, tasks, agents, dims, table, n_core):
     body = (phead(t["home_round"], t["grid_title"], t["untested_note"])
             + f"""<div class="scroll"><table class="grid">
 <thead><tr><th scope="col">{e(t['agent'])}</th><th scope="col">{e(t['overall'])}</th><th scope="col">{e(t['safety'])}</th><th scope="col">{e(t['coverage'])}</th>{head}</tr></thead>
-<tbody>{''.join(rows)}</tbody></table></div>""")
+<tbody>{''.join(rows)}</tbody></table></div><ol class="gcards">{''.join(gcards)}</ol>""")
     return page(L, "grid/", t["grid_title"], body)
 
 
@@ -427,9 +436,9 @@ def outcome_cell(run, L):
 def render_agents(L, agents, table, n_core):
     t = T[L]
     items = "".join(
-        f'<li><a href="/{L}/agents/{a["id"]}/"><b>{e(agent_name(a, L))}</b></a>'
+        f'<li><a class="lcard" href="/{L}/agents/{a["id"]}/"><b>{e(agent_name(a, L))}</b>'
         f'<span>{e(a["maker"][L])} · {e(a["kind"][L])}</span>'
-        f'<span class="meta">{e(t["market"][a["market"]])} · {e(t["tested_of"].format(n=table[a["id"]]["coverage"], m=n_core))}</span></li>' for a in agents)
+        f'<span class="meta">{e(t["market"][a["market"]])} · {e(t["tested_of"].format(n=table[a["id"]]["coverage"], m=n_core))}</span></a></li>' for a in agents)
     return page(L, "agents/", t["agents_title"], phead(t["home_round"], t["agents_title"], t["home_round_note"]) + f"<ul class='list'>{items}</ul>")
 
 
@@ -468,8 +477,8 @@ def render_agent(L, a, tasks, dims, table, n_core):
 def render_dimensions(L, dims, dim_tasks, tasks_by_id):
     t = T[L]
     items = "".join(
-        f'<li><a href="/{L}/dimensions/{d["id"]}/"><b>{e(d["name"][L])}</b></a><span>{e(d["about"][L])}</span>'
-        f'<span class="meta">{len(dim_tasks[d["id"]])} × {e(t["task"])}</span></li>' for d in dims)
+        f'<li><a class="lcard" href="/{L}/dimensions/{d["id"]}/"><b>{e(d["name"][L])}</b><span>{e(d["about"][L])}</span>'
+        f'<span class="meta">{len(dim_tasks[d["id"]])} × {e(t["task"])}</span></a></li>' for d in dims)
     return page(L, "dimensions/", t["dims_title"], phead(t["tasks_title"], t["dims_title"]) + f"<ul class='list'>{items}</ul>")
 
 
@@ -477,9 +486,14 @@ def render_dimension(L, d, dim_tasks, tasks_by_id, agents, table):
     t = T[L]
     cards = "".join(chat_card(tasks_by_id[x], L) for x in dim_tasks[d["id"]])
     ranked = sorted(agents, key=lambda a: -(table[a["id"]]["dims"][d["id"]] if table[a["id"]]["dims"][d["id"]] is not None else -1))
-    rows = "".join(f'<tr><td>{e(agent_name(a, L))}</td><td><a href="/{L}/agents/{a["id"]}/">{fmt(table[a["id"]]["dims"][d["id"]], L)}</a></td></tr>' for a in ranked)
-    body = (phead(t["dims_title"], d["name"][L], d["about"][L], f'<a href="/{L}/dimensions/">{e(t["dims_title"])}</a>')
-            + f'<div class="tgrid">{cards}</div><h2 class="boardh">{e(t["results"])}</h2><table class="runs"><tbody>{rows}</tbody></table>')
+    def row(a):
+        v = table[a["id"]]["dims"][d["id"]]
+        w = 0 if v is None else v * 10
+        return (f'<li><a href="/{L}/agents/{a["id"]}/">{e(agent_name(a, L))}</a>'
+                f'<span class="rbar"><i style="width:{w:.0f}%"></i></span>{fmt(v, L)}</li>')
+    rows = "".join(row(a) for a in ranked)
+    body = (phead(f'{len(dim_tasks[d["id"]])} × {t["task"]}', d["name"][L], d["about"][L], f'<a href="/{L}/dimensions/">{e(t["dims_title"])}</a>')
+            + f'<div class="tgrid">{cards}</div><h2 class="boardh">{e(t["results"])}</h2><ol class="ranking">{rows}</ol>')
     return page(L, f"dimensions/{d['id']}/", d["name"][L], body, d["about"][L])
 
 
@@ -538,8 +552,8 @@ def render_fails(L, runs, agents_by_id, tasks_by_id):
         body = head + f"<p class='empty'>{e(t['fails_empty'])}</p>"
     else:
         cards = "".join(
-            f"<article class='failcard'><div class='ch meta'>{badge(r['outcome'], L)} {e(agent_name(agents_by_id[r['agent']], L))} · "
-            f"{task_link(tasks_by_id[r['task']], L)} {e(tasks_by_id[r['task']]['title'][L])}</div>"
+            f"<article class='failcard'><div class='fhead'>{badge(r['outcome'], L)}<b>{e(agent_name(agents_by_id[r['agent']], L))}</b>"
+            f"<span class='meta'>{task_link(tasks_by_id[r['task']], L)}</span><span class='muted'>{e(tasks_by_id[r['task']]['title'][L])}</span></div>"
             f"<blockquote>“{e(r.get('quote_' + L) or r.get('quote'))}”</blockquote>"
             f"<p class='muted'>{e(r.get('reality_' + L) or r.get('reality') or '')}</p>"
             + (f"<p><a class='more' href='{e(r['evidence'][0])}'>{e('看录屏' if L == 'zh' else 'Watch the recording')}</a></p>" if r.get("evidence") else "")
@@ -605,6 +619,9 @@ def md_to_html(md, L):
     while i < len(lines):
         line = lines[i]
         if not line.strip():
+            i += 1
+            continue
+        if re.fullmatch(r"\[(English|中文)\]\([^)]*\)", line.strip()):
             i += 1
             continue
         if line.startswith("#"):
