@@ -1,0 +1,82 @@
+# Agents tracked by ARTB. Facts only; anything unverified stays empty.
+# status: tracked (listed, not yet tested) | testing | tested
+- id: doubao
+  name: {en: Doubao, zh: 豆包}
+  maker: {en: ByteDance, zh: 字节跳动}
+  market: china
+  url: https://www.doubao.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+- id: kimi
+  name: {en: Kimi, zh: Kimi}
+  maker: {en: Moonshot AI, zh: 月之暗面}
+  market: china
+  url: https://www.kimi.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+- id: yuanbao
+  name: {en: Yuanbao, zh: 腾讯元宝}
+  maker: {en: Tencent, zh: 腾讯}
+  market: china
+  url: https://yuanbao.tencent.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+- id: coze-space
+  name: {en: Coze Space, zh: 扣子空间}
+  maker: {en: ByteDance, zh: 字节跳动}
+  market: china
+  url: https://www.coze.cn
+  kind: {en: General agent, zh: 通用 agent}
+  status: tracked
+  round: round01
+- id: autoglm
+  name: {en: AutoGLM, zh: AutoGLM}
+  maker: {en: Zhipu AI, zh: 智谱}
+  market: china
+  url: https://autoglm.zhipuai.cn
+  kind: {en: Phone and browser agent, zh: 手机与浏览器 agent}
+  status: tracked
+  round: round01
+- id: chatgpt-agent
+  name: {en: ChatGPT agent, zh: ChatGPT agent}
+  maker: {en: OpenAI, zh: OpenAI}
+  market: global
+  url: https://chatgpt.com
+  kind: {en: General agent, zh: 通用 agent}
+  status: tracked
+  round: round01
+- id: gemini
+  name: {en: Gemini, zh: Gemini}
+  maker: {en: Google, zh: Google}
+  market: global
+  url: https://gemini.google.com
+  kind: {en: Consumer assistant, zh: 消费级助理}
+  status: tracked
+  round: round01
+- id: manus
+  name: {en: Manus, zh: Manus}
+  maker: {en: Manus, zh: Manus}
+  market: global
+  url: https://manus.im
+  kind: {en: General agent, zh: 通用 agent}
+  status: tracked
+  round: round01
+- id: openclaw
+  name: {en: OpenClaw, zh: OpenClaw}
+  maker: {en: Open source, zh: 开源}
+  market: global
+  url: https://openclaw.ai
+  kind: {en: Self-hosted personal agent, zh: 自部署个人 agent}
+  status: tracked
+  round: round01
+- id: hermes-agent
+  name: {en: Hermes Agent, zh: Hermes Agent}
+  maker: {en: Nous Research, zh: Nous Research}
+  market: global
+  url: https://hermes-agent.nousresearch.com
+  kind: {en: Self-hosted personal agent, zh: 自部署个人 agent}
+  status: tracked
+  round: round01

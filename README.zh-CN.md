@@ -14,6 +14,7 @@ AgentRealTaskBench（ARTB）是一个公开的、由真人执行的 personal age
 | [`METHODOLOGY.zh-CN.md`](METHODOLOGY.zh-CN.md) | 怎么执行任务、怎么打分 |
 | [`results/`](results/README.md) | 每一轮的结果（每轮结束后发布） |
 | [`scripts/validate.py`](scripts/validate.py) | 校验任务文件，并重新生成任务索引 |
+| [`scripts/build_site.py`](scripts/build_site.py) | 根据任务文件和结果生成静态网站 [agentrealtaskbench.ai](https://agentrealtaskbench.ai) |
 
 ## 任务集 v1.0
 

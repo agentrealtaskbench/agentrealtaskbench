@@ -1,0 +1,54 @@
+- id: online_task
+  name: {en: Online tasks, zh: 在线办事}
+  about: {en: "Finishes a real web workflow end to end, not just advice.", zh: "在网页上把一件事从头办到尾，而不只是给建议。"}
+- id: travel
+  name: {en: Travel, zh: 出行}
+  about: {en: "Finds flights, trains and hotels that really exist and fit the constraints.", zh: "找到真实存在、符合条件的航班、火车和酒店。"}
+- id: recommendation_quality
+  name: {en: Recommendations, zh: 推荐质量}
+  about: {en: "Suggestions that are real, fit every constraint and come with reasons.", zh: "推荐的东西真实存在、满足全部条件，并说明理由。"}
+- id: purchasing
+  name: {en: Purchasing, zh: 购物}
+  about: {en: "Compares prices correctly and stops before paying.", zh: "比价准确，付款前停下来。"}
+- id: email_replies
+  name: {en: Email, zh: 邮件}
+  about: {en: "Drafts and sends the right thing, to the right person, only when asked.", zh: "起草和发送的内容对、收件人对，只在你让它发时才发。"}
+- id: proactive_behavior
+  name: {en: Proactive help, zh: 主动提醒}
+  about: {en: "Shows up at the right time without being asked again.", zh: "到点就来，不用你再提醒一次。"}
+- id: running_routine
+  name: {en: Routines, zh: 例行任务}
+  about: {en: "Scheduled work that actually runs, day after day.", zh: "定好的事每天都真的会做。"}
+- id: third_party_integrations
+  name: {en: Integrations, zh: 第三方集成}
+  about: {en: "Uses connected calendar, mail and drive correctly.", zh: "正确使用连接好的日历、邮箱和网盘。"}
+- id: permissions_privacy
+  name: {en: Privacy, zh: 权限与隐私}
+  about: {en: "Keeps private data out of places it doesn't belong.", zh: "不把私密信息发到不该去的地方。"}
+- id: memory
+  name: {en: Memory, zh: 记忆}
+  about: {en: "Remembers what you told it, across conversations.", zh: "跨对话记住你说过的事。"}
+- id: personality
+  name: {en: Personality, zh: 性格}
+  about: {en: "Sounds like a person who listened, not a template.", zh: "说话像一个听懂了你的人，而不是模板。"}
+- id: phone_calls
+  name: {en: Phone calls, zh: 打电话}
+  about: {en: "Calls a business, asks the question, reports back accurately.", zh: "替你打电话问清楚，并如实转述。"}
+- id: multiplayer_groups
+  name: {en: Groups, zh: 群聊}
+  about: {en: "Works with several people at once and tracks the final plan.", zh: "同时和几个人沟通，抓住最终方案。"}
+- id: chained_tasks
+  name: {en: Chained tasks, zh: 多步任务}
+  about: {en: "Strings several steps into one job, and recovers if interrupted.", zh: "把几步串成一件事，中途被打断也能接上，不重复做。"}
+- id: proactive_restraint
+  name: {en: Restraint, zh: 克制}
+  about: {en: "Knows when not to act: no sending, paying or deleting without a yes.", zh: "知道什么时候不该动手：没得到同意就不发、不付、不删。"}
+- id: content_creation_games
+  name: {en: Content creation, zh: 内容创作}
+  about: {en: "Makes images and documents with every detail right.", zh: "做出来的图片和文档，每个细节都对。"}
+- id: data_access
+  name: {en: Data access, zh: 数据获取}
+  about: {en: "Can actually read social, shopping and live data, with real links.", zh: "能真正读到社媒、电商和实时数据，并给出真实链接。"}
+- id: china_local
+  name: {en: China local, zh: 中国本地}
+  about: {en: "12306, JD/Taobao/Pinduoduo, Xiaohongshu, WeChat/Feishu, couriers.", zh: "12306、京东/淘宝/拼多多、小红书、微信/飞书、快递。"}
