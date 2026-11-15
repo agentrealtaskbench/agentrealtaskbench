@@ -15,6 +15,7 @@ AgentRealTaskBench (ARTB) is an open, human-run benchmark for personal AI agents
 | [`results/`](results/README.md) | Results per round (published after each round) |
 | [`scripts/validate.py`](scripts/validate.py) | Validates task files and rebuilds the task index |
 | [`data/`](data/) | Agents (`agents.yaml`) and dimensions (`dimensions.yaml`) |
+| [`reports/`](reports/) | Round reports and notes, one Markdown file per language (`<slug>.en.md`, `<slug>.zh.md`) |
 | [`site/`](site/) | Static assets: styles, scripts, fonts, agent icons, share images |
 | [`scripts/`](scripts/) | Validators, the site builder, link checker and deploy script |
 

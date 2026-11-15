@@ -532,3 +532,18 @@ thead th { font-size: 13px; color: var(--ink-muted); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { flex: none; }
 }
+
+/* Skip link, reports */
+.skip { position: absolute; left: 12px; top: -48px; z-index: 50; background: var(--ink); color: var(--canvas); padding: 10px 14px; }
+.skip:focus { top: 12px; color: var(--canvas); }
+.reports { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; max-width: 880px; }
+.rcard { display: block; border: 1px solid var(--line); border-radius: var(--r); padding: 24px; background: var(--sheet); color: var(--ink); transition: box-shadow .3s, transform .3s; }
+.rcard:hover { box-shadow: var(--float); transform: translateY(-2px); color: var(--ink); }
+.rcard h3 { font-size: 24px; line-height: 1.25; margin: 8px 0 8px; }
+.rcard p { color: var(--ink-muted); }
+.rcard.big { max-width: 880px; }
+.rcard.big h3 { font-size: clamp(24px, 1.2rem + 1vw, 32px); }
+.post .prose { font-size: 17px; }
+.post .prose p, .post .prose li { font-size: 17px; line-height: 1.75; }
+.post .prose p + p { margin-top: 14px; }
+.post .prose a { color: var(--accent); }

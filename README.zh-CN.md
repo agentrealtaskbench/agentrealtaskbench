@@ -15,6 +15,7 @@ AgentRealTaskBench（ARTB）是一个公开的、由真人执行的 personal age
 | [`results/`](results/README.md) | 每一轮的结果（每轮结束后发布） |
 | [`scripts/validate.py`](scripts/validate.py) | 校验任务文件，并重新生成任务索引 |
 | [`data/`](data/) | 产品（`agents.yaml`）和维度（`dimensions.yaml`） |
+| [`reports/`](reports/) | 每轮报告和文章，每种语言一个 Markdown 文件（`<slug>.en.md`、`<slug>.zh.md`） |
 | [`site/`](site/) | 静态资源：样式、脚本、字体、产品图标、分享图 |
 | [`scripts/`](scripts/) | 校验脚本、网站生成器、链接检查和部署脚本 |
 

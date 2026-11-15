@@ -31,7 +31,7 @@ T = {
         "tagline": "Can your AI agent actually [get things done]?",
         "sub": "Real tasks from everyday life. Every run recorded. Every score backed by evidence. In English and Chinese.",
         "nav": [("grid", "Scorecard"), ("agents", "Agents"), ("compare", "Compare"), ("dimensions", "Dimensions"),
-                ("tasks", "Tasks"), ("fails", "Fails"), ("methodology", "Method"), ("about", "About")],
+                ("tasks", "Tasks"), ("fails", "Fails"), ("reports", "Reports"), ("methodology", "Method"), ("about", "About")],
         "request": "Request a test", "usecase": "Submit a use case", "feedback": "Task feedback",
         "not_tested": "Not tested", "untested_note": "Untested means blank. We never guess a score.",
         "overall": "Overall", "safety": "Safety", "coverage": "Coverage", "agent": "Agent",
@@ -83,7 +83,7 @@ T = {
         "tagline": "你的 AI 助理，|[真的能把事办成]吗？",
         "sub": "用日常生活里的真实任务去测，每次测试都录屏，每个分数都有证据。中英双语。",
         "nav": [("grid", "总榜"), ("agents", "产品"), ("compare", "对比"), ("dimensions", "维度"),
-                ("tasks", "任务"), ("fails", "翻车现场"), ("methodology", "方法"), ("about", "关于")],
+                ("tasks", "任务"), ("fails", "翻车现场"), ("reports", "报告"), ("methodology", "方法"), ("about", "关于")],
         "request": "申请测评", "usecase": "投稿场景", "feedback": "任务反馈",
         "not_tested": "未测", "untested_note": "没测就留空，我们从不估分。",
         "overall": "总分", "safety": "安全分", "coverage": "覆盖", "agent": "产品",
@@ -302,9 +302,11 @@ def page(L, path, title, body, desc=None, main_class=""):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/ClashGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{asset('style.css')}">
+<link rel="alternate" type="application/rss+xml" title="AgentRealTaskBench" href="/{L}/feed.xml">
 <script src="{asset('theme.js')}"></script>
 </head>
 <body>
+<a class="skip" href="#main">{e("跳到正文" if L == "zh" else "Skip to content")}</a>
 <div class="strip"><b>{e(sb)}</b><span class="long">{e(st)}</span><a href="/{L}/request/">{e(sl)}</a></div>
 <header class="top">
   <a class="brand" href="/{L}/"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="bname">AgentRealTaskBench</span></a>
@@ -312,7 +314,7 @@ def page(L, path, title, body, desc=None, main_class=""):
   <div class="tools"><a class="lang" href="{alt}" hreflang="{t['other']}">{e(t['other_label'])}</a><button class="theme" type="button" aria-label="{e(t['theme_label'])}" title="{e(t['theme_label'])}"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
   <a class="btn primary sm" href="/{L}/request/">{e(t['request'])}</a></div>
 </header>
-<main{' class=' + main_class if main_class else ''}>
+<main id="main"{' class=' + main_class if main_class else ''}>
 {body}
 </main>
 <footer>
@@ -412,6 +414,7 @@ def render_home(L, tasks, agents, table, n_core):
   <div class="pillars">{pillars}</div>
   <p style="margin-top:28px"><a class="more" href="/{L}/methodology/">{e(t['method_title'])}</a></p>
 </section>
+{latest_report_html(L)}
 <section class="closing">
   <div><h2>{e("下一轮该测哪个？" if zh else "Which agent should we test next?")}</h2><p>{e(t['home_who'])}</p></div>
   <div class="ctas"><a class="btn" href="/{L}/request/">{e(t['request'])} <span class="arrow">→</span></a><a class="btn ghost" href="{X_URL}">{e(t['follow'])}</a></div>
@@ -419,6 +422,25 @@ def render_home(L, tasks, agents, table, n_core):
 <script src="{asset('filter.js')}"></script>
 """
     return page(L, "", "", body, main_class="home")
+
+
+REPORTS = {"en": [], "zh": []}
+
+
+def latest_report_html(L):
+    if not REPORTS[L]:
+        return ""
+    r = REPORTS[L][0]
+    zh = L == "zh"
+    ld = json.dumps({"@context": "https://schema.org", "@type": "Dataset", "name": "AgentRealTaskBench",
+                     "description": T[L]["sub"], "url": f"{BASE}/{L}/", "license": "https://creativecommons.org/licenses/by/4.0/",
+                     "creator": {"@type": "Person", "name": "David Li", "url": X_URL},
+                     "distribution": {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{BASE}/data.json"}},
+                    ensure_ascii=False).replace("</", "<\\/")
+    return (f'<section class="section latest"><div class="shead"><h2>{e("最新报告" if zh else "Latest report")}</h2>'
+            f'<p class="lede"><a class="more" href="/{L}/reports/">{e("全部报告" if zh else "All reports")}</a></p></div>'
+            f'<a class="rcard big" href="/{L}/reports/{r["slug"]}/"><span class="meta">{e(r["date"])}</span><h3>{e(r["title"])}</h3><p>{e(r["summary"])}</p></a></section>'
+            f'<script type="application/ld+json">{ld}</script>')
 
 
 def render_grid(L, tasks, agents, dims, table, n_core):
@@ -637,6 +659,57 @@ def render_compare(L, agents, dims, table, n_core):
     return page(L, "compare/", t["compare_title"], body)
 
 
+def load_reports(L):
+    out = []
+    for f in sorted((ROOT / "reports").glob(f"*.{L}.md")):
+        text = f.read_text(encoding="utf-8")
+        if not text.startswith("---"):
+            raise SystemExit(f"{f}: missing front matter")
+        _, fm, body = text.split("---", 2)
+        meta = yaml.safe_load(fm)
+        for key in ("title", "date", "summary"):
+            if key not in meta:
+                raise SystemExit(f"{f}: front matter needs '{key}'")
+        out.append({**meta, "slug": f.name[: -len(f".{L}.md")], "body": body.strip(), "date": str(meta["date"])})
+    return sorted(out, key=lambda r: r["date"], reverse=True)
+
+
+def render_reports(L, reports):
+    t = T[L]
+    zh = L == "zh"
+    items = "".join(
+        f'<li><a class="rcard" href="/{L}/reports/{r["slug"]}/"><span class="meta">{e(r["date"])}</span>'
+        f'<h3>{e(r["title"])}</h3><p>{e(r["summary"])}</p></a></li>' for r in reports)
+    body = (phead("RSS", "报告" if zh else "Reports", "每轮结果、周报和长文。" if zh else "Round results, weekly notes and longer write-ups.")
+            + (f'<ul class="reports">{items}</ul>' if reports else f"<p class='empty'>{e(t['no_runs'])}</p>")
+            + f'<p class="boardnote" style="margin-top:24px"><a href="/{L}/feed.xml">RSS</a> · <a href="{X_URL}">{e(t["follow"])}</a></p>')
+    return page(L, "reports/", "报告" if zh else "Reports", body)
+
+
+def render_report(L, r):
+    zh = L == "zh"
+    crumb = f'<a href="/{L}/reports/">{e("报告" if zh else "Reports")}</a>'
+    by = f'{e(r.get("author", ""))} · {e(r["date"])}' if r.get("author") else e(r["date"])
+    body = (f'<article class="post">{phead(by, r["title"], r["summary"], crumb)}'
+            f'<div class="prose">{md_to_html(r["body"], L)}</div></article>')
+    return page(L, f"reports/{r['slug']}/", r["title"], body, r["summary"])
+
+
+def render_feed(L, reports):
+    zh = L == "zh"
+    from email.utils import format_datetime
+    import datetime as _dt
+    def when(d):
+        return format_datetime(_dt.datetime.combine(_dt.date.fromisoformat(d), _dt.time(9), _dt.timezone.utc))
+    items = "".join(
+        f"<item><title>{e(r['title'])}</title><link>{BASE}/{L}/reports/{r['slug']}/</link>"
+        f"<guid>{BASE}/{L}/reports/{r['slug']}/</guid><pubDate>{when(r['date'])}</pubDate>"
+        f"<description>{e(r['summary'])}</description></item>" for r in reports)
+    return (f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+            f"<title>AgentRealTaskBench</title><link>{BASE}/{L}/</link>"
+            f"<description>{e(T[L]['sub'])}</description><language>{'zh-cn' if zh else 'en'}</language>{items}</channel></rss>")
+
+
 def render_md_page(L, slug, title, md_path):
     return page(L, f"{slug}/", title, '<div class="prose">' + md_to_html(md_path.read_text(encoding="utf-8"), L) + "</div>")
 
@@ -783,6 +856,13 @@ def main():
     shutil.copytree(SITE, DIST)
     PAGES.clear()
     for L in LANGS:
+        REPORTS[L] = load_reports(L)
+    for L in LANGS:
+        write(f"{L}/reports/index.html", render_reports(L, REPORTS[L]))
+        for r in REPORTS[L]:
+            write(f"{L}/reports/{r['slug']}/index.html", render_report(L, r))
+        (DIST / L).mkdir(parents=True, exist_ok=True)
+        (DIST / L / "feed.xml").write_text(render_feed(L, REPORTS[L]), encoding="utf-8")
         write(f"{L}/index.html", render_home(L, tasks, roster, table, n_core))
         write(f"{L}/grid/index.html", render_grid(L, tasks, roster, dims, table, n_core))
         write(f"{L}/agents/index.html", render_agents(L, agents, table, n_core))
