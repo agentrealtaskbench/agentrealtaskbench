@@ -203,12 +203,6 @@ def badge(outcome, L):
     return f'<span class="status {outcome}">{e(T[L]["outcome"][outcome])}</span>'
 
 
-STRIP = {
-    "en": ("ROUND 01", "{n} agents, {m} real tasks. Results land here with every recording.", "Request a test"),
-    "zh": ("第一轮", "{n} 个产品，{m} 个真实任务。结果会和全部录屏一起发布在这里。", "申请测评"),
-}
-
-
 COUNTS = {"agents": 0, "tasks": 0, "done": 0}
 
 
@@ -285,8 +279,6 @@ def page(L, path, title, body, desc=None, main_class=""):
     canonical = f"{BASE}/{L}/{path}"
     full_title = f"{title} · AgentRealTaskBench" if title else "AgentRealTaskBench"
     desc = desc or t["sub"]
-    sb, st, sl = STRIP[L]
-    st = st.format(n=COUNTS["agents"], m=COUNTS["tasks"])
     return f"""<!doctype html>
 <html lang="{t['lang']}">
 <head>
@@ -316,7 +308,6 @@ def page(L, path, title, body, desc=None, main_class=""):
 </head>
 <body>
 <a class="skip" href="#main">{e("跳到正文" if L == "zh" else "Skip to content")}</a>
-<div class="strip"><b>{e(sb)}</b><span class="long">{e(st)}</span><a href="/{L}/request/">{e(sl)}</a></div>
 <header class="top">
   <a class="brand" href="/{L}/"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="bname">AgentRealTaskBench</span></a>
   <nav>{nav}</nav>
