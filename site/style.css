@@ -547,3 +547,6 @@ thead th { font-size: 13px; color: var(--ink-muted); }
 .post .prose p, .post .prose li { font-size: 17px; line-height: 1.75; }
 .post .prose p + p { margin-top: 14px; }
 .post .prose a { color: var(--accent); }
+.progress { display: grid; gap: 8px; margin: 0 0 32px; max-width: 520px; font-size: 14px; color: var(--ink-muted); }
+.progress i { display: block; height: 6px; background: var(--surface-alt); border-radius: 3px; overflow: hidden; }
+.progress b { display: block; height: 100%; min-width: 4px; background: var(--violet); border-radius: 3px; }

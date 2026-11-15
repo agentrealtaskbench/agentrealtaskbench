@@ -33,3 +33,17 @@ reality: "Two emails arrived."  # optional
 evidence:
   - https://...           # recording, screenshots · 录屏、截图
 ```
+
+## Recording a run · 记录一次测试
+
+```bash
+python3 scripts/new_run.py round01 kimi ARTB-001 --outcome pass --region CN   # writes a pre-filled file
+# fill in reviews, evidence links (https), agent_version; add a 'third' review if the first two disagree
+python3 scripts/validate_data.py                                              # must pass before commit
+python3 scripts/round_status.py round01                                       # progress per agent
+```
+
+`new_run.py` 会生成一个预填好的结果文件，文件开头注释里有该任务的提示词和通过标准。
+填好两位评审的结论和证据链接（https），两人结论不一致时加一条 `third` 评审。
+`validate_data.py` 通过后再提交；`round_status.py` 可以看每个产品的进度。
+Files with `TODO` left in them fail validation, so drafts never reach the site. · 留有 `TODO` 的文件无法通过校验，草稿不会上线。

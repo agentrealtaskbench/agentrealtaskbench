@@ -209,7 +209,16 @@ STRIP = {
 }
 
 
-COUNTS = {"agents": 0, "tasks": 0}
+COUNTS = {"agents": 0, "tasks": 0, "done": 0}
+
+
+def progress_html(L):
+    total = COUNTS["agents"] * COUNTS["tasks"]
+    done = COUNTS["done"]
+    pct = 0 if not total else done * 100 / total
+    label = (f"第一轮进度：已完成 {done} / {total} 次测试" if L == "zh" else f"Round 01 progress: {done} of {total} runs done")
+    return (f'<div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="{total}" aria-valuenow="{done}">'
+            f'<span>{e(label)}</span><i><b style="width:{pct:.1f}%"></b></i></div>')
 
 GROUPS = {
     "assistant": {"en": "Everyday assistants", "zh": "日常助理"},
@@ -397,7 +406,7 @@ def render_home(L, tasks, agents, table, n_core):
     <ul class="fine">{''.join(f'<li>{e(f)}</li>' for f in fine)}</ul>
   </div>
 </section>
-<section class="logos"><div class="lhead"><h2>{e("第一轮测试的产品" if zh else "Who's in round 01")}</h2><a class="more" href="/{L}/agents/">{e("全部产品" if zh else "All agents")}</a></div>{''.join(rows)}</section>
+<section class="logos">{progress_html(L)}<div class="lhead"><h2>{e("第一轮测试的产品" if zh else "Who's in round 01")}</h2><a class="more" href="/{L}/agents/">{e("全部产品" if zh else "All agents")}</a></div>{''.join(rows)}</section>
 <section class="stats">{stat_html}</section>
 <section class="section">
   <div class="shead"><h2>{e("一句真实的请求，一条能核对的标准。" if zh else "One real request. One rule you can check.")}</h2>
@@ -469,7 +478,7 @@ def render_grid(L, tasks, agents, dims, table, n_core):
                     f'<small>{e(a["maker"][L])}</small></span></a></th>'
                     f'<td class="strong">{fmt(r["overall"], L)}</td><td>{fmt(r["safety"], L)}{flag}</td>'
                     f'<td class="muted">{r["coverage"]}/{n_core}</td>{cells}</tr>')
-    body = (phead(t["home_round"], t["grid_title"], t["untested_note"])
+    body = (phead(t["home_round"], t["grid_title"], t["untested_note"]) + progress_html(L)
             + tabs("grid", [(f"group:{k}", v[L]) for k, v in GROUPS.items()], L)
             + f"""<div class="scroll"><table class="grid">
 <thead><tr><th scope="col">{e(t['agent'])}</th><th scope="col">{e(t['overall'])}</th><th scope="col">{e(t['safety'])}</th><th scope="col">{e(t['coverage'])}</th>{head}</tr></thead>
@@ -845,7 +854,8 @@ def main():
             raise SystemExit(f"run for unknown agent {r['agent']}")
     table, dim_tasks, n_core = compute(tasks, agents, dims, runs)
     roster = [a for a in agents if a.get("round") == "round01"]
-    COUNTS.update(agents=len(roster), tasks=len(tasks))
+    COUNTS.update(agents=len(roster), tasks=len(tasks),
+                  done=sum(1 for a in roster for _ in table[a["id"]]["runs"]))
     tasks_by_id = {x["id"]: x for x in tasks}
     dims_by_id = {d["id"]: d for d in dims}
     agents_by_id = {a["id"]: a for a in agents}

@@ -92,6 +92,18 @@ def check_runs(errors, agent_ids):
             errors.append(f"{where}: needs at least two reviews (tester and second reviewer)")
         if not run.get("evidence") and run.get("outcome") != "unsupported":
             errors.append(f"{where}: needs at least one evidence link")
+        for ev in run.get("evidence") or []:
+            if not str(ev).startswith("https://"):
+                errors.append(f"{where}: evidence must be https links, got '{ev}'")
+        outs = [r.get("outcome") for r in reviews]
+        if any(o not in OUTCOMES for o in outs):
+            errors.append(f"{where}: every review needs a final outcome (no TODO)")
+        names = [r.get("reviewer") for r in reviews]
+        if len(set(outs[:2])) > 1 and "third" not in names:
+            errors.append(f"{where}: tester and second reviewer disagree; add a 'third' review")
+        decided = next((r.get("outcome") for r in reviews if r.get("reviewer") == "third"), outs[0] if outs else None)
+        if reviews and run.get("outcome") != decided:
+            errors.append(f"{where}: outcome must equal the agreed review (or the third reviewer's call)")
     return count
 
 
