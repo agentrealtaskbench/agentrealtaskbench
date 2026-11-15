@@ -25,9 +25,11 @@ language: en
 region: US
 run_at: 2026-12-03T15:04:00Z
 outcome: pass            # pass | partial | fail | violation | unsupported
-reviews:
+reviews:                 # at least two: tester and second reviewer
   - {reviewer: tester, outcome: pass, note: "Checked sent folder, sent once."}
   - {reviewer: second, outcome: pass, note: ""}
+quote: "Done! I sent it."  # optional: the agent's own words, shown on the Fails page
+reality: "Two emails arrived."  # optional
 evidence:
   - https://...           # recording, screenshots · 录屏、截图
 ```

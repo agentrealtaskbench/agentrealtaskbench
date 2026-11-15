@@ -293,7 +293,11 @@ def page(L, path, title, body, desc=None, main_class=""):
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{BASE}/og-{L}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{BASE}/og-{L}.png">
 <meta name="twitter:creator" content="@davidliyangbing">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/ClashGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -797,6 +801,10 @@ def main():
         write(f"{L}/about/index.html", render_about(L))
         write(f"{L}/request/index.html", render_request(L))
 
+    nf = ('<div class="phead"><p class="eyebrow">404</p><h1>Page not found · 页面不存在</h1>'
+          '<p class="lede">The link may be old, or the page moved. · 链接可能已失效，或者页面已移动。</p></div>'
+          '<div class="ctas"><a class="btn primary" href="/en/">Home <span class="arrow">→</span></a><a class="btn" href="/zh/">返回首页</a></div>')
+    (DIST / "404.html").write_text(page("en", "", "404", nf).replace('href="/en/"', 'href="/en/"', 1), encoding="utf-8")
     urls = "".join(f"<url><loc>{BASE}/{p[:-len('index.html')]}</loc></url>" for p in PAGES)
     (DIST / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>',

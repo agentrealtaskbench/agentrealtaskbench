@@ -14,7 +14,9 @@ AgentRealTaskBench (ARTB) is an open, human-run benchmark for personal AI agents
 | [`METHODOLOGY.md`](METHODOLOGY.md) | How we run tasks and score them |
 | [`results/`](results/README.md) | Results per round (published after each round) |
 | [`scripts/validate.py`](scripts/validate.py) | Validates task files and rebuilds the task index |
-| [`scripts/build_site.py`](scripts/build_site.py) | Builds the static site at [agentrealtaskbench.ai](https://agentrealtaskbench.ai) from the task files and results |
+| [`data/`](data/) | Agents (`agents.yaml`) and dimensions (`dimensions.yaml`) |
+| [`site/`](site/) | Static assets: styles, scripts, fonts, agent icons, share images |
+| [`scripts/`](scripts/) | Validators, the site builder, link checker and deploy script |
 
 ## Task set v1.0
 
@@ -42,6 +44,22 @@ ARTB is run by David Li ([@davidliyangbing](https://x.com/davidliyangbing)), fou
 - Agents are scored exactly as shipped, with no extra tools or plugins added by us.
 - No sponsorships, no paid placement. We pay for every subscription we test.
 - Vendors can check facts 48 hours before publication. Corrections are logged publicly.
+
+## Run the site locally
+
+```bash
+pip install pyyaml
+python3 scripts/validate.py --check      # task files and index
+python3 scripts/validate_data.py         # agents, dimensions, result runs
+python3 scripts/build_site.py            # writes dist/
+python3 scripts/check_links.py           # no broken local links
+python3 -m http.server 8000 --directory dist
+```
+
+Then open http://localhost:8000. Add `?theme=dark` to any page to preview dark mode.
+
+Adding an agent: append it to `data/agents.yaml` and drop a square PNG icon at `site/logos/<id>.png`.
+Adding a result: write `results/<round>/runs/<agent>/<task>.yaml` (see [`results/README.md`](results/README.md)).
 
 ## License
 

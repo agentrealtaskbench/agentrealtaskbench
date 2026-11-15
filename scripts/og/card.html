@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Clash Grotesk"; src: url("../../site/fonts/ClashGrotesk-Variable.woff2") format("woff2"); font-weight: 200 700; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1200px; height: 630px; }
+body { background: #ffffff; color: #18181b; font-family: -apple-system, "PingFang SC", sans-serif; padding: 72px 80px; display: flex; flex-direction: column; }
+.brand { display: flex; align-items: center; gap: 14px; font: 550 30px/1 "Clash Grotesk", sans-serif; letter-spacing: -.02em; }
+.logo { width: 36px; height: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.logo i { background: #18181b; border-radius: 4px; }
+.logo i:last-child { background: #8b6fff; }
+h1 { font: 500 86px/1.04 "Clash Grotesk", "PingFang SC", sans-serif; letter-spacing: -.03em; margin-top: 64px; }
+mark { background: linear-gradient(transparent 58%, #e5ff6e 58%, #e5ff6e 92%, transparent 92%); color: inherit; }
+.sub { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; font-size: 26px; color: #52525b; }
+.url { font: 500 26px/1 "Clash Grotesk", sans-serif; color: #18181b; }
+</style>
+</head>
+<body>
+<div class="brand"><span class="logo"><i></i><i></i><i></i><i></i></span>AgentRealTaskBench</div>
+<h1 id="t"></h1>
+<div class="sub"><span id="s"></span><span class="url">agentrealtaskbench.ai</span></div>
+<script>
+  var zh = location.hash === "#zh";
+  document.getElementById("t").innerHTML = zh ? "你的 AI 助理，<br>真的能<mark>把事办成</mark>吗？" : "Can your AI agent<br>actually <mark>get it done?</mark>";
+  document.getElementById("s").textContent = zh ? "真实任务 · 全程录屏 · 双人盲评" : "Real tasks · Every run recorded · Blind second review";
+</script>
+</body>
+</html>

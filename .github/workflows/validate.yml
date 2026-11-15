@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  tasks:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,4 +15,30 @@ jobs:
           python-version: "3.12"
       - run: pip install pyyaml==6.0.2
       - run: python3 scripts/validate.py --check
-      - run: python3 scripts/build_site.py
+      - run: python3 scripts/validate_data.py
+      - run: python3 scripts/build_site.py --base-url "${SITE_URL:-https://agentrealtaskbench.pages.dev}"
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+      - run: python3 scripts/check_links.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 7
+
+  # Deploys main to Cloudflare Pages. Skipped until the repo has a
+  # CLOUDFLARE_API_TOKEN secret (Pages: Edit) and a CLOUDFLARE_ACCOUNT_ID variable.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.CLOUDFLARE_ACCOUNT_ID != ''
+    runs-on: ubuntu-latest
+    concurrency: pages-deploy
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+      - run: npx -y wrangler@4 pages deploy dist --project-name agentrealtaskbench --branch main --commit-hash "$GITHUB_SHA"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

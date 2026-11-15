@@ -14,7 +14,9 @@ AgentRealTaskBench（ARTB）是一个公开的、由真人执行的 personal age
 | [`METHODOLOGY.zh-CN.md`](METHODOLOGY.zh-CN.md) | 怎么执行任务、怎么打分 |
 | [`results/`](results/README.md) | 每一轮的结果（每轮结束后发布） |
 | [`scripts/validate.py`](scripts/validate.py) | 校验任务文件，并重新生成任务索引 |
-| [`scripts/build_site.py`](scripts/build_site.py) | 根据任务文件和结果生成静态网站 [agentrealtaskbench.ai](https://agentrealtaskbench.ai) |
+| [`data/`](data/) | 产品（`agents.yaml`）和维度（`dimensions.yaml`） |
+| [`site/`](site/) | 静态资源：样式、脚本、字体、产品图标、分享图 |
+| [`scripts/`](scripts/) | 校验脚本、网站生成器、链接检查和部署脚本 |
 
 ## 任务集 v1.0
 
@@ -42,6 +44,22 @@ ARTB 由 David Li（[@davidliyangbing](https://x.com/davidliyangbing)）维护�
 - 所有 agent 都按出厂状态测试，我们不额外加装任何工具或插件。
 - 不接受赞助，不卖排名。所有被测产品的订阅费用都由我们自己支付。
 - 厂商可以在发布前 48 小时核对事实，所有更正都公开记录。
+
+## 本地运行网站
+
+```bash
+pip install pyyaml
+python3 scripts/validate.py --check      # 任务文件和索引
+python3 scripts/validate_data.py         # 产品、维度、测试结果
+python3 scripts/build_site.py            # 生成 dist/
+python3 scripts/check_links.py           # 检查站内链接
+python3 -m http.server 8000 --directory dist
+```
+
+打开 http://localhost:8000 。任意页面加 `?theme=dark` 可以预览深色模式。
+
+新增产品：在 `data/agents.yaml` 里加一条，并把方形 PNG 图标放到 `site/logos/<id>.png`。
+新增结果：写入 `results/<轮次>/runs/<产品>/<任务>.yaml`（格式见 [`results/README.md`](results/README.md)）。
 
 ## 许可
 
