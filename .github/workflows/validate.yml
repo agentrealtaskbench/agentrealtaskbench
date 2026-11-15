@@ -16,7 +16,7 @@ jobs:
       - run: pip install pyyaml==6.0.2
       - run: python3 scripts/validate.py --check
       - run: python3 scripts/validate_data.py
-      - run: python3 scripts/build_site.py --base-url "${SITE_URL:-https://agentrealtaskbench.pages.dev}"
+      - run: python3 scripts/build_site.py --base-url "${SITE_URL:-https://agentrealtaskbench.ai}"
         env:
           SITE_URL: ${{ vars.SITE_URL }}
       - run: python3 scripts/check_links.py

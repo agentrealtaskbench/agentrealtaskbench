@@ -4,6 +4,8 @@
 
 **你的 AI 助理真的能把事办成吗？我们用日常生活里的真实任务去测，每次测试都录屏，结果全部公开。**
 
+🌐 https://agentrealtaskbench.ai
+
 AgentRealTaskBench（ARTB）是一个公开的、由真人执行的 personal agent / AI 助理评测。每个任务都按真实用户会说的话来写，每个分数都附录屏，完整任务集就放在这个仓库里。
 
 ## 仓库内容

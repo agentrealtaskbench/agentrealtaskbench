@@ -3,7 +3,7 @@
 # Needs: python3 + pyyaml, and wrangler logged in (or CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID set).
 # SITE_URL controls canonical links and share images; switch it once the custom domain is live.
 set -euo pipefail
-SITE_URL="${SITE_URL:-https://agentrealtaskbench.pages.dev}"
+SITE_URL="${SITE_URL:-https://agentrealtaskbench.ai}"
 python3 scripts/validate.py --check
 python3 scripts/validate_data.py
 python3 scripts/build_site.py --base-url "$SITE_URL"
