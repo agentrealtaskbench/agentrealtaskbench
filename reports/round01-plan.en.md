@@ -12,7 +12,7 @@ Every assistant says it can run your errands. Very few say which errands, and no
 Twenty agents, grouped by what they are rather than where they come from:
 
 - **Everyday assistants**: ChatGPT agent, Gemini, Claude, Muse, Perplexity, Doubao, Kimi.
-- **Agents that do the work**: Dots, GrokBot, Manus.
+- **Agents that do the work**: Dots, Grok Bot, Manus.
 - **Assistants you text**: Poke, Today, Instinct, Tomo, Pally, Asmi, szn, Tab.
 - **Open source**: OpenClaw, Hermes Agent.
 

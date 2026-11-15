@@ -12,7 +12,7 @@ summary: "第一轮测什么、怎么测，以及结果出来后你能看到什�
 一共 20 个，按产品类型分组，不按产地：
 
 - **日常助理**：ChatGPT agent、Gemini、Claude、Muse、Perplexity、豆包、Kimi。
-- **替你动手的 agent**：Dots、GrokBot、Manus。
+- **替你动手的 agent**：Dots、Grok Bot、Manus。
 - **发消息就能用的助理**：Poke、Today、Instinct、Tomo、Pally、Asmi、szn、Tab。
 - **开源 · 自部署**：OpenClaw、Hermes Agent。
 

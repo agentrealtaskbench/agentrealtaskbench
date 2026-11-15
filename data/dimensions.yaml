@@ -50,5 +50,5 @@
   name: {en: Data access, zh: 数据获取}
   about: {en: "Can actually read social, shopping and live data, with real links.", zh: "能真正读到社媒、电商和实时数据，并给出真实链接。"}
 - id: china_local
-  name: {en: China local, zh: 中国本地}
+  name: {en: "Local apps: China", zh: 本地应用 · 国内}
   about: {en: "12306, JD/Taobao/Pinduoduo, Xiaohongshu, WeChat/Feishu, couriers.", zh: "12306、京东/淘宝/拼多多、小红书、微信/飞书、快递。"}

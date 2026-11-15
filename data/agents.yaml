@@ -53,15 +53,19 @@
   market: global
   url: https://muse.ai/
   kind: {en: Personal assistant, zh: 个人助理}
+  channels: [iOS, Android, Web, WhatsApp]
   status: tracked
   round: round01
 - id: grok-bot
   group: doer
-  name: {en: GrokBot, zh: GrokBot}
-  maker: {en: Cursor, zh: Cursor}
+  name: {en: Grok Bot, zh: Grok Bot}
+  maker: {en: xAI, zh: xAI}
   market: global
-  url: https://cursor.com/grok-bot
-  kind: {en: General agent, zh: 通用 agent}
+  url: https://x.ai/news/introducing-grok-bot
+  kind: {en: AI teammates with their own computer, zh: 自带云电脑的 AI 队友}
+  channels: [macOS, Windows, Linux, iOS, Android]
+  price: {en: "Included with paid Cursor plans, or by linking a SuperGrok subscription", zh: "Cursor 付费套餐自带，或绑定 SuperGrok 订阅"}
+  checked: 2026-11-15
   status: tracked
   round: round01
 - id: perplexity
