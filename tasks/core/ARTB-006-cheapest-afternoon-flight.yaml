@@ -18,13 +18,14 @@ prompt:
   zh: 帮我找 {date} 从 {origin} 到 {destination}、中午 12 点以后出发、最便宜的直飞航班，告诉我航班号、时间、价格和信息来源。
 params:
 - name: origin
-  description: 'zh: domestic China city pair; en: US city pair'
+  description: 'One city pair for every agent in the round: an international route bookable from both US and Chinese sites (for example Tokyo to Seoul)'
 - name: destination
   description: See origin
 - name: date
-  description: 6-8 days after the test date
+  description: The same date for every agent, 6-8 days after the first test day
 setup:
 - Tester records a baseline from two booking sites within 15 minutes of the run.
+- Prices are compared in USD at the run-day exchange rate.
 limits:
   time_limit_min: 30
   neutral_follow_ups: 1

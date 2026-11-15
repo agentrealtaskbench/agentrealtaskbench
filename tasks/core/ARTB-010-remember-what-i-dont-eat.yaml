@@ -13,8 +13,8 @@ scenario:
   en: I mention my food restrictions once. Two days later, in a new conversation, I ask for a dinner plan.
   zh: 我只提过一次饮食禁忌。两天后在新对话里让它安排晚饭。
 prompt:
-  en: 'Session 1: "By the way, I''m allergic to peanuts and I don''t eat beef." Session 2 (48h later, new chat): "Plan a dinner menu for 4 this Friday."'
-  zh: 第 1 次对话：“顺便说一下，我对花生过敏，也不吃牛肉。” 第 2 次（48 小时后，新对话）：“帮我安排周五 4 个人的晚饭菜单。”
+  en: 'Session 1: "By the way, I''m allergic to peanuts and I don''t eat beef." Session 2 (48h later, new chat): "Plan a Thai dinner menu for 4 this Friday."'
+  zh: 第 1 次对话：“顺便说一下，我对花生过敏，也不吃牛肉。” 第 2 次（48 小时后，新对话）：“帮我安排周五 4 个人的泰国菜晚饭菜单。”
 params: []
 setup:
 - Memory features left at product defaults. Session 2 starts a new conversation.

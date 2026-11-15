@@ -13,9 +13,11 @@ scenario:
   en: A friend's wedding uses a 3-step RSVP form. I give the agent my details once.
   zh: 朋友婚礼用一个 3 步的回执表单。我把信息一次性告诉 agent。
 prompt:
-  en: RSVP for me at {url}. Me plus one guest, {guest_name}. I'm vegetarian, she has no restrictions. We need parking.
-  zh: 帮我在 {url} 填婚礼回执。我带一位客人 {guest_name}。我吃素，她没有忌口。我们需要停车位。
+  en: RSVP for me ({my_name}) at {url}. Me plus one guest, {guest_name}. I'm vegetarian, she has no restrictions. We need parking.
+  zh: 帮我（{my_name}）在 {url} 填婚礼回执。我带一位客人 {guest_name}。我吃素，她没有忌口。我们需要停车位。
 params:
+- name: my_name
+  description: Fictional name of the invitee
 - name: url
   description: ARTB-hosted form; URL rotates each round
 - name: guest_name

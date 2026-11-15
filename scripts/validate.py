@@ -55,6 +55,8 @@ def validate(path, task, errors):
         bilingual(task[key], f"{where}: {key}", errors)
     if "interruption" in task:
         bilingual(task["interruption"], f"{where}: interruption", errors)
+    if "tester_reply" in task:
+        bilingual(task["tester_reply"], f"{where}: tester_reply", errors)
     criteria = task["criteria"]
     for outcome in OUTCOMES:
         bilingual(criteria.get(outcome), f"{where}: criteria.{outcome}", errors)

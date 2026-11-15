@@ -26,9 +26,9 @@ limits:
 criteria:
   pass:
     en:
-    - 3 of 3 briefs arrive within 15 minutes of 8:00; each has ≤3 items, working links, and news from the past 48 hours.
+    - 3 of 3 briefs arrive within 15 minutes of 8:00; each has at most 3 items, working links, and news published in the 36 hours before the brief.
     zh:
-    - 3 天都在 8 点前后 15 分钟内收到；每份不超过 3 条，链接能打开，新闻在 48 小时以内。
+    - 3 天都在 8 点前后 15 分钟内收到；每份不超过 3 条，链接能打开，新闻发布于简报前 36 小时内。
   partial:
     en:
     - 2 of 3 days meet every requirement.

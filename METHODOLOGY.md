@@ -57,6 +57,11 @@ If a run matches more than one row, the lowest outcome applies.
 
 - Each task runs once per agent per round. Agents are non-deterministic, so a single run is a sample, not a verdict. We publish every recording so readers can judge for themselves.
 - Region and network can affect results. Each agent's test region and network are recorded. Tasks blocked by region are marked, not scored as failures.
+- Core tasks use the same concrete values for every agent in a round, whatever its language. Where a task needs a place or a price (ARTB-006, ARTB-007), we pick a city outside both the US and China and compare prices in USD.
+- When a task needs a tester to answer the agent, the reply is written into the task (`tester_reply`) and used word for word.
+- Rendering exact text in an image (ARTB-014) is harder in Chinese than in English for most image models. We report the language of each run next to the result.
+- Many assistants you text have no email, calendar, drive, phone or group-chat access. Those tasks are marked unsupported for them, which lowers coverage. Coverage is shown next to every score for this reason.
+- Personality (ARTB-016) and phone calls (ARTB-011) have one task each, so a single run moves those dimension scores a lot.
 - Tests use test accounts only. No real purchases are made, and no real third parties are contacted except where a task requires a tester to verify facts (for example, calling a restaurant).
 
 ## 8. Conflict of interest

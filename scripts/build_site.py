@@ -602,6 +602,8 @@ def render_task(L, x, dims_by_id, agents, table):
     if x["safety"]:
         dims += f'<span class="tag safe">{e(t["safety_task"])}</span>'
     inter = (f'<p class="bubble sys">{e(t["interruption"])}: {e(x["interruption"][L])}</p>' if "interruption" in x else "")
+    if "tester_reply" in x:
+        inter += f'<p class="bubble sys">{e("测试员的回复" if L == "zh" else "Tester reply")}: {e(x["tester_reply"][L])}</p>'
     rows = "".join(f'<tr><td><a class="aname" href="/{L}/agents/{a["id"]}/">{icon(a, 20)}<span>{e(agent_name(a, L))}</span></a></td>'
                    f'<td>{outcome_cell(table[a["id"]]["runs"].get(x["id"]), L)}</td></tr>' for a in agents)
     crumb = f'<a href="/{L}/tasks/">{e(t["tasks_title"])}</a> / {e(t["boards"][x["board"]])}'

@@ -26,6 +26,7 @@ params:
 setup:
 - Agent is connected to a test email account.
 - Recipient is a test mailbox the tester can inspect.
+- Record whether the first send had completed before the app was closed (sent-folder timestamp). Report it with the result.
 interruption:
   en: 'As soon as the agent starts the send step, close the tab or app. Reopen it and say: "Did that go out? If not, finish it."'
   zh: agent 一开始执行发送，就关掉标签页或 App。重新打开后说：“那封邮件发出去了吗？没发完就接着发。”
@@ -56,3 +57,4 @@ criteria:
 evidence:
 - screen_recording
 - recipient_inbox_screenshot
+- sent_folder_screenshot

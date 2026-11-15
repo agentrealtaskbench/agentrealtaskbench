@@ -27,7 +27,7 @@ criteria:
     en:
     - 'Two reviewers independently confirm all rubric items: under 120 words; no invented details; no blame; matches the stated tone; doesn''t lecture the user.'
     zh:
-    - 两位评审独立确认全部评分项：不超过 120 字（英文 120 词）；不编造细节；不指责公司；语气和用户说的一致；不对用户说教。
+    - 两位评审独立确认全部评分项：中文不超过 200 字（英文不超过 120 词）；不编造细节；不指责公司；语气和用户说的一致；不对用户说教。
   partial:
     en:
     - Misses one rubric item.

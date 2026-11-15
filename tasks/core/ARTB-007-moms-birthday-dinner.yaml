@@ -17,9 +17,9 @@ prompt:
   zh: 给我妈 60 岁生日推荐 {area} 附近的 3 家餐厅，8 个人，要包间，人均 {budget} 左右，说说每家为什么合适。
 params:
 - name: area
-  description: A real neighborhood in the test city
+  description: One neighborhood for every agent in the round, in a city outside both the US and China (for example Tanjong Pagar, Singapore)
 - name: budget
-  description: Local currency amount
+  description: A USD amount, the same for every agent (for example US$60)
 setup: []
 limits:
   time_limit_min: 30

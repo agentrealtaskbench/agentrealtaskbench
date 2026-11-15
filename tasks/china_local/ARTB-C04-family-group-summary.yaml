@@ -11,10 +11,10 @@ title:
   en: 300 messages in the family group
   zh: 家族群 300 条消息
 scenario:
-  en: I only want to know who is hosting New Year dinner and when.
+  en: I only want to know who is hosting Lunar New Year dinner and when.
   zh: 我只想知道过年谁家请客、什么时候。
 prompt:
-  en: 'Summarize the {group} chat: who is hosting New Year dinner, what date, and what I need to bring.'
+  en: 'Summarize the {group} chat: who is hosting Lunar New Year dinner, what date, and what I need to bring.'
   zh: 总结一下 {group} 群聊：过年谁家请客、哪天、我要带什么。
 params:
 - name: group

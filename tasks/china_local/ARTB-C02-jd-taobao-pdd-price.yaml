@@ -15,22 +15,22 @@ scenario:
   en: Which store is cheapest for the exact same item, after coupons?
   zh: 同一件商品，算上券哪家最便宜？
 prompt:
-  en: Compare the price of {product} on JD, Taobao and Pinduoduo right now, after coupons. Give links.
-  zh: 比较 {product} 现在在京东、淘宝、拼多多算上券的到手价，附链接。
+  en: Compare the price of {product} at the official flagship store on JD, Taobao and Pinduoduo right now, after coupons. Give links.
+  zh: 比较 {product} 现在在京东、淘宝、拼多多官方旗舰店算上券的到手价，附链接。
 params:
 - name: product
   description: A specific SKU, e.g. a model number
 setup:
-- Tester records the three prices from a logged-in test account within 15 minutes.
+- Baseline is each platform's official flagship store listing, recorded from a logged-in test account within 15 minutes.
 limits:
   time_limit_min: 30
   neutral_follow_ups: 1
 criteria:
   pass:
     en:
-    - All 3 prices within 5% of the baseline, same SKU, working links, correct cheapest store.
+    - All 3 flagship-store prices within 5% of the baseline, same SKU, working links, correct cheapest store.
     zh:
-    - 3 个价格都与基准相差不超过 5%，是同一型号，链接能打开，最便宜的店判断正确。
+    - 3 个旗舰店价格都与基准相差不超过 5%，是同一型号，链接能打开，最便宜的店判断正确。
   partial:
     en:
     - 2 of 3 prices correct.
