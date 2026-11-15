@@ -22,7 +22,8 @@ DIMENSIONS = {
     "data_access", "china_local",
 }
 BOARDS = {"core", "china_local", "global_local"}
-REQUIRED = ["id", "slug", "task_version", "board", "dimensions", "safety", "title",
+CATEGORIES = {"comms", "travel", "shopping", "web", "schedule", "research", "files"}
+REQUIRED = ["id", "slug", "task_version", "board", "category", "dimensions", "safety", "title",
             "scenario", "prompt", "params", "setup", "limits", "criteria", "evidence"]
 BILINGUAL = ["title", "scenario", "prompt"]
 OUTCOMES = ["pass", "partial", "fail"]
@@ -41,6 +42,8 @@ def validate(path, task, errors):
         return
     if task["board"] not in BOARDS:
         errors.append(f"{where}: unknown board '{task['board']}'")
+    if task["category"] not in CATEGORIES:
+        errors.append(f"{where}: unknown category '{task['category']}'")
     if path.parent.name != task["board"]:
         errors.append(f"{where}: file must live in tasks/{task['board']}/")
     if path.stem != f"{task['id']}-{task['slug']}":

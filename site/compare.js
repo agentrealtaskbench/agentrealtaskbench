@@ -18,8 +18,13 @@
     th.textContent = label; tr.appendChild(th); tr.appendChild(cell(a)); tr.appendChild(cell(b));
     out.appendChild(tr);
   }
+  function setIcon(img, ag) {
+    if (ag.icon) { img.src = ag.icon; img.hidden = false; } else { img.hidden = true; }
+  }
   function render() {
     var a = data.agents[A.value], b = data.agents[B.value];
+    setIcon(document.getElementById("ia"), a);
+    setIcon(document.getElementById("ib"), b);
     out.textContent = "";
     var head = document.createElement("tr");
     [ "", a.name, b.name ].forEach(function (t) { var th = document.createElement("th"); th.textContent = t; head.appendChild(th); });
