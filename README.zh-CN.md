@@ -20,6 +20,7 @@ AgentRealTaskBench（ARTB）是一个公开的、由真人执行的 personal age
 | [`reports/`](reports/) | 每轮报告和文章，每种语言一个 Markdown 文件（`<slug>.en.md`、`<slug>.zh.md`） |
 | [`site/`](site/) | 静态资源：样式、脚本、字体、产品图标、分享图 |
 | [`scripts/`](scripts/) | 校验脚本、网站生成器、链接检查和部署脚本 |
+| [`functions/`](functions/) | Cloudflare Pages 中间件：把 www 和 pages.dev 跳转到 agentrealtaskbench.ai |
 
 ## 任务集 v1.0
 

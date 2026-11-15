@@ -20,6 +20,7 @@ AgentRealTaskBench (ARTB) is an open, human-run benchmark for personal AI agents
 | [`reports/`](reports/) | Round reports and notes, one Markdown file per language (`<slug>.en.md`, `<slug>.zh.md`) |
 | [`site/`](site/) | Static assets: styles, scripts, fonts, agent icons, share images |
 | [`scripts/`](scripts/) | Validators, the site builder, link checker and deploy script |
+| [`functions/`](functions/) | Cloudflare Pages middleware: redirects www and pages.dev to agentrealtaskbench.ai |
 
 ## Task set v1.0
 
