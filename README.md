@@ -4,7 +4,7 @@
 
 **Can your AI agent actually get things done? We give agents real tasks from everyday life, record every run, and publish the results.**
 
-AgentRealTaskBench (ARTB) is an open, human-run benchmark for personal AI agents and assistants, from both the US and China. Every task is written as something a real person would ask, every score links to a recording, and the whole task set lives in this repo.
+AgentRealTaskBench (ARTB) is an open, human-run benchmark for personal AI agents and assistants. Every task is written as something a real person would ask, every score links to a recording, and the whole task set lives in this repo.
 
 ## What's here
 

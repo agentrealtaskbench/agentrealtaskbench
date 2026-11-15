@@ -5,7 +5,7 @@
 
 # ---- General agents from large labs ----
 - id: chatgpt-agent
-  group: lab
+  group: assistant
   name: {en: ChatGPT agent, zh: ChatGPT agent}
   maker: {en: OpenAI, zh: OpenAI}
   market: global
@@ -15,7 +15,7 @@
   status: tracked
   round: round01
 - id: dots
-  group: lab
+  group: doer
   name: {en: Dots, zh: Dots}
   maker: {en: OpenAI, zh: OpenAI}
   market: global
@@ -27,7 +27,7 @@
   status: tracked
   round: round01
 - id: gemini
-  group: lab
+  group: assistant
   name: {en: Gemini, zh: Gemini}
   maker: {en: Google, zh: Google}
   market: global
@@ -37,7 +37,7 @@
   status: tracked
   round: round01
 - id: claude
-  group: lab
+  group: assistant
   name: {en: Claude, zh: Claude}
   maker: {en: Anthropic, zh: Anthropic}
   market: global
@@ -47,7 +47,7 @@
   status: tracked
   round: round01
 - id: muse
-  group: lab
+  group: assistant
   name: {en: Muse, zh: Muse}
   maker: {en: Meta, zh: Meta}
   market: global
@@ -56,7 +56,7 @@
   status: tracked
   round: round01
 - id: grok-bot
-  group: lab
+  group: doer
   name: {en: GrokBot, zh: GrokBot}
   maker: {en: Cursor, zh: Cursor}
   market: global
@@ -65,7 +65,7 @@
   status: tracked
   round: round01
 - id: perplexity
-  group: lab
+  group: assistant
   name: {en: Perplexity, zh: Perplexity}
   maker: {en: Perplexity, zh: Perplexity}
   market: global
@@ -75,7 +75,7 @@
   status: tracked
   round: round01
 - id: manus
-  group: lab
+  group: doer
   name: {en: Manus, zh: Manus}
   maker: {en: Manus, zh: Manus}
   market: global
@@ -192,7 +192,7 @@
 
 # ---- China ----
 - id: doubao
-  group: china
+  group: assistant
   name: {en: Doubao, zh: 豆包}
   maker: {en: ByteDance, zh: 字节跳动}
   market: china
@@ -201,7 +201,7 @@
   status: tracked
   round: round01
 - id: kimi
-  group: china
+  group: assistant
   name: {en: Kimi, zh: Kimi}
   maker: {en: Moonshot AI, zh: 月之暗面}
   market: china
@@ -228,7 +228,7 @@
   kind: {en: Self-hosted personal agent, zh: 自部署个人 agent}
   status: tracked
 - id: yuanbao
-  group: china
+  group: assistant
   name: {en: Yuanbao, zh: 腾讯元宝}
   maker: {en: Tencent, zh: 腾讯}
   market: china
@@ -236,7 +236,7 @@
   kind: {en: Consumer assistant, zh: 消费级助理}
   status: tracked
 - id: coze-space
-  group: china
+  group: doer
   name: {en: Coze Space, zh: 扣子空间}
   maker: {en: ByteDance, zh: 字节跳动}
   market: china
@@ -244,7 +244,7 @@
   kind: {en: General agent, zh: 通用 agent}
   status: tracked
 - id: autoglm
-  group: china
+  group: doer
   name: {en: AutoGLM, zh: AutoGLM}
   maker: {en: Zhipu AI, zh: 智谱}
   market: china

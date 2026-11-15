@@ -29,7 +29,7 @@ T = {
     "en": {
         "lang": "en", "other": "zh", "other_label": "中文", "theme_label": "Switch light / dark",
         "tagline": "Can your AI agent actually [get things done]?",
-        "sub": "Real tasks from everyday life. Every run recorded. Every score backed by evidence. US and Chinese agents, in English and Chinese.",
+        "sub": "Real tasks from everyday life. Every run recorded. Every score backed by evidence. In English and Chinese.",
         "nav": [("grid", "Scorecard"), ("agents", "Agents"), ("compare", "Compare"), ("dimensions", "Dimensions"),
                 ("tasks", "Tasks"), ("fails", "Fails"), ("methodology", "Method"), ("about", "About")],
         "request": "Request a test", "usecase": "Submit a use case", "feedback": "Task feedback",
@@ -37,7 +37,7 @@ T = {
         "overall": "Overall", "safety": "Safety", "coverage": "Coverage", "agent": "Agent",
         "market": {"china": "China", "global": "Global"}, "maker": "Maker", "kind": "Type", "website": "Website",
         "status": {"tracked": "Listed, testing soon", "testing": "Testing now", "tested": "Tested"},
-        "boards": {"core": "Core tasks", "china_local": "China local", "global_local": "Global local"},
+        "boards": {"core": "Core tasks", "china_local": "Local: China apps", "global_local": "Local: US apps"},
         "board_note": {"core": "Every agent runs these. Scores are comparable across agents.",
                        "china_local": "Scored separately. Not part of the overall score.",
                        "global_local": "Scored separately. Not part of the overall score."},
@@ -53,7 +53,7 @@ T = {
             ("30 real tasks", "Every dimension has at least one task. Concrete values change every round, so nobody can train for the test."),
             ("Two reviewers, blind", "A second reviewer scores from the evidence without seeing the first score. Disagreements go to a third."),
             ("Rules you can check", "Pass, partial, fail and violation are written so you can check them against the recording."),
-            ("China and the US", "Doubao, Kimi and Yuanbao next to ChatGPT, Gemini and Manus. Plus separate China and global local boards."),
+            ("Same tasks for everyone", "Big-lab assistants, startups you text and open-source agents all run the same 20 core tasks."),
             ("Safety scored on its own", "Six tasks test whether an agent sends, pays or deletes without asking. Any violation is flagged."),
             ("Everything is open", "Tasks, method, fixture generators and results live in a public GitHub repo."),
         ],
@@ -81,7 +81,7 @@ T = {
     "zh": {
         "lang": "zh-CN", "other": "en", "other_label": "English", "theme_label": "切换白色 / 深色",
         "tagline": "你的 AI 助理，|[真的能把事办成]吗？",
-        "sub": "用日常生活里的真实任务去测，每次测试都录屏，每个分数都有证据。同时覆盖中国和海外产品，中英双语。",
+        "sub": "用日常生活里的真实任务去测，每次测试都录屏，每个分数都有证据。中英双语。",
         "nav": [("grid", "总榜"), ("agents", "产品"), ("compare", "对比"), ("dimensions", "维度"),
                 ("tasks", "任务"), ("fails", "翻车现场"), ("methodology", "方法"), ("about", "关于")],
         "request": "申请测评", "usecase": "投稿场景", "feedback": "任务反馈",
@@ -89,7 +89,7 @@ T = {
         "overall": "总分", "safety": "安全分", "coverage": "覆盖", "agent": "产品",
         "market": {"china": "中国", "global": "海外"}, "maker": "厂商", "kind": "类型", "website": "官网",
         "status": {"tracked": "已收录，即将测试", "testing": "测试中", "tested": "已测试"},
-        "boards": {"core": "通用任务", "china_local": "中国本地", "global_local": "海外本地"},
+        "boards": {"core": "通用任务", "china_local": "本地任务 · 国内应用", "global_local": "本地任务 · 海外应用"},
         "board_note": {"core": "所有产品都测，分数可以横向比较。",
                        "china_local": "单独计分，不计入总分。",
                        "global_local": "单独计分，不计入总分。"},
@@ -105,7 +105,7 @@ T = {
             ("30 个真实任务", "每个维度至少一个任务。具体参数每轮更换，没法针对题目优化。"),
             ("双人盲评", "第二位评审只看证据、看不到第一位的打分，独立判定；有分歧由第三位裁定。"),
             ("标准可以核对", "通过、部分通过、失败、越权都写成可以对照录屏核对的标准。"),
-            ("中国和海外一起测", "豆包、Kimi、元宝和 ChatGPT、Gemini、Manus 放在一起比，另有中国本地榜和海外本地榜。"),
+            ("所有产品同一套题", "大厂助理、发消息就能用的创业产品和开源 agent，都跑同样的 20 个通用任务。"),
             ("安全单独计分", "6 个任务专门测 agent 会不会不经同意就发送、付款或删除，越权会被标出来。"),
             ("全部公开", "任务、方法、素材生成器和结果都在公开的 GitHub 仓库里。"),
         ],
@@ -204,18 +204,18 @@ def badge(outcome, L):
 
 
 STRIP = {
-    "en": ("ROUND 01", "{n} agents, mostly US, plus China. {m} real tasks. Results land here with every recording.", "Request a test"),
-    "zh": ("第一轮", "{n} 个产品，以海外为主，也有中国产品。{m} 个真实任务，结果会和全部录屏一起发布在这里。", "申请测评"),
+    "en": ("ROUND 01", "{n} agents, {m} real tasks. Results land here with every recording.", "Request a test"),
+    "zh": ("第一轮", "{n} 个产品，{m} 个真实任务。结果会和全部录屏一起发布在这里。", "申请测评"),
 }
 
 
 COUNTS = {"agents": 0, "tasks": 0}
 
 GROUPS = {
-    "lab": {"en": "Large labs", "zh": "大厂通用 agent"},
+    "assistant": {"en": "Everyday assistants", "zh": "日常助理"},
+    "doer": {"en": "Agents that do the work", "zh": "替你动手的 agent"},
     "texting": {"en": "Assistants you text", "zh": "发消息就能用的助理"},
     "open": {"en": "Open source", "zh": "开源 · 自部署"},
-    "china": {"en": "China", "zh": "中国"},
 }
 CATS = {
     "comms": {"en": "Messages & email", "zh": "沟通与邮件"},
@@ -432,7 +432,7 @@ def render_grid(L, tasks, agents, dims, table, n_core):
         r = table[a["id"]]
         flag = f' <span class="status violation">{r["violations"]}× {e(t["outcome"]["violation"])}</span>' if r["violations"] else ""
         gtag = f' data-item="grid" data-tags="group:{a.get("group", "")}"'
-        gcards.append(f'<li{gtag}><a href="/{L}/agents/{a["id"]}/"><span class="gname">{icon(a, 28)}<span><b>{e(agent_name(a, L))}</b><small>{e(a["maker"][L])} · {e(t["market"][a["market"]])}</small></span></span>'
+        gcards.append(f'<li{gtag}><a href="/{L}/agents/{a["id"]}/"><span class="gname">{icon(a, 28)}<span><b>{e(agent_name(a, L))}</b><small>{e(a["maker"][L])}</small></span></span>'
                       f'<span class="gnum"><span class="score-label">{e(t["overall"])}</span>{fmt(r["overall"], L)}</span>'
                       f'<span class="gnum"><span class="score-label">{e(t["safety"])}</span>{fmt(r["safety"], L)}</span>'
                       f'<span class="gnum"><span class="score-label">{e(t["coverage"])}</span><span class="score">{r["coverage"]}/{n_core}</span></span>'
@@ -440,7 +440,7 @@ def render_grid(L, tasks, agents, dims, table, n_core):
         flag = f' <span class="status violation">{r["violations"]}× {e(t["outcome"]["violation"])}</span>' if r["violations"] else ""
         cells = "".join(f"<td>{fmt(r['dims'][d['id']], L)}</td>" for d in dims)
         rows.append(f'<tr{gtag}><th scope="row"><a class="aname" href="/{L}/agents/{a["id"]}/">{icon(a, 24)}<span>{e(agent_name(a, L))}'
-                    f'<small>{e(a["maker"][L])} · {e(t["market"][a["market"]])}</small></span></a></th>'
+                    f'<small>{e(a["maker"][L])}</small></span></a></th>'
                     f'<td class="strong">{fmt(r["overall"], L)}</td><td>{fmt(r["safety"], L)}{flag}</td>'
                     f'<td class="muted">{r["coverage"]}/{n_core}</td>{cells}</tr>')
     body = (phead(t["home_round"], t["grid_title"], t["untested_note"])
